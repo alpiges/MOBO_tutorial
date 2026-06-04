@@ -1,0 +1,14 @@
+# gitignore
+papers/pdf/*
+
+*.jpg
+*.jpeg
+*.png
+
+*.pyc
+*.egg-info/
+**/__pycache__/
+**/.ipynb_checkpoints/
+
+
+*.DS_Store
