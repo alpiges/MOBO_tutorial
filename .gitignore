@@ -1,10 +1,4 @@
 # gitignore
-papers/pdf/*
-
-*.jpg
-*.jpeg
-*.png
-
 *.pyc
 *.egg-info/
 **/__pycache__/
