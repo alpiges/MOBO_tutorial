@@ -27,7 +27,7 @@ uv sync
 source .venv/bin/activate
 ```
 
-To also install the development dependencies (JupyterLab, pytest, ruff):
+To also install the development dependencies (marimo, pytest, ruff):
 
 ```bash
 uv sync --group dev
@@ -39,10 +39,9 @@ With the environment activated:
 
 ```bash
 cd tutorial
-jupyter lab
+marimo edit notebooks/mobo_1D.py        # 1D toy problem
+marimo edit notebooks/mobo_tutorial.py  # full tutorial
 ```
-
-Then open `notebooks/mobo_1D.ipynb` or `notebooks/mobo_tutorial.ipynb`.
 
 ---
 
