@@ -158,7 +158,12 @@ class ZDT1(MOTestFunction):
     M = 2
 
     def __init__(self) -> None:
-        self.ref_point = torch.tensor([-1.1, -1.1])
+        # ref₁ = -1.1: f₁ ∈ [0,1] always dominates this.
+        # ref₂ = -6.0: typical random points have f₂ ≈ g*(1-√(x₁/g)) ≈ 3-4,
+        # so -f₂ ≈ -3 to -4, which dominates -6.0.  Using -1.1 (the near-optimal
+        # bound) means no random initial point ever dominates the reference and
+        # HV = 0 throughout the run.
+        self.ref_point = torch.tensor([-1.1, -6.0])
 
     @property
     def search_space(self) -> SearchSpace:
