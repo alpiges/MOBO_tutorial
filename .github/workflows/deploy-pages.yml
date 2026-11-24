@@ -2,7 +2,7 @@ name: Deploy slides to GitHub Pages
 
 on:
   push:
-    branches: [liverpool26]
+    branches: [main]
     paths:
       - slides/**
   workflow_dispatch:
