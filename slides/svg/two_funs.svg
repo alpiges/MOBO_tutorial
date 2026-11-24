@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 410" style="background:#f9fbff;">
+  <defs>
+    <marker id="ax" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect width="980" height="410" fill="#f9fbff"/>
+
+
+  <!-- teal bands -->
+  <!-- <rect x="130" y="28" width="120" height="397" fill="#0d9488" fill-opacity="0.10"/>
+  <rect x="300" y="28" width="130" height="397" fill="#0d9488" fill-opacity="0.10"/>
+  <rect x="520" y="28" width="90"  height="397" fill="#0d9488" fill-opacity="0.10"/>
+  <rect x="670" y="28" width="95"  height="397" fill="#0d9488" fill-opacity="0.10"/> -->
+
+  <!-- amber bands -->
+  <!-- <rect x="430" y="28" width="90"  height="397" fill="#d97706" fill-opacity="0.10"/>
+  <rect x="765" y="28" width="85"  height="397" fill="#d97706" fill-opacity="0.10"/> -->
+
+  <!-- ── Labels in the inter-panel gap (y≈225) ── -->
+  <!-- teal labels -->
+  <!-- <text x="190" y="228" text-anchor="middle" font-size="10.5" font-family="Georgia, serif" fill="#0d9488" font-weight="600">f&#x2081;&#x2191; f&#x2082;&#x2193;</text>
+  <text x="365" y="228" text-anchor="middle" font-size="10.5" font-family="Georgia, serif" fill="#0d9488" font-weight="600">f&#x2081;&#x2191; f&#x2082;&#x2193;</text>
+  <text x="565" y="228" text-anchor="middle" font-size="10.5" font-family="Georgia, serif" fill="#0d9488" font-weight="600">f&#x2081;&#x2191; f&#x2082;&#x2193;</text>
+  <text x="717" y="228" text-anchor="middle" font-size="10.5" font-family="Georgia, serif" fill="#0d9488" font-weight="600">f&#x2081;&#x2191; f&#x2082;&#x2193;</text> -->
+  <!-- amber labels -->
+  <!-- <text x="475" y="228" text-anchor="middle" font-size="10.5" font-family="Georgia, serif" fill="#b45309" font-weight="600">f&#x2081;&#x2193; f&#x2082;&#x2191;</text>
+  <text x="807" y="228" text-anchor="middle" font-size="10.5" font-family="Georgia, serif" fill="#b45309" font-weight="600">f&#x2081;&#x2193; f&#x2082;&#x2191;</text> -->
+  <!-- "dominated" markers in unshaded gaps -->
+  <!-- <text x="103" y="242" text-anchor="middle" font-size="9" font-family="Georgia, serif" fill="#94a3b8" font-style="italic">dom.</text>
+  <text x="275" y="242" text-anchor="middle" font-size="9" font-family="Georgia, serif" fill="#94a3b8" font-style="italic">dom.</text>
+  <text x="640" y="242" text-anchor="middle" font-size="9" font-family="Georgia, serif" fill="#94a3b8" font-style="italic">dom.</text>
+  <text x="895" y="242" text-anchor="middle" font-size="9" font-family="Georgia, serif" fill="#94a3b8" font-style="italic">dom.</text> -->
+
+  <!-- ═══════════════════════════════════════════════════
+       Panel 1 — f₁(x)    plot area y: 28 … 185
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- panel background -->
+  <rect x="80" y="28" width="860" height="157" fill="#f0f4f8" rx="3"/>
+
+  <!-- axes -->
+  <line x1="80"  y1="185" x2="80"  y2="26"  stroke="#334155" stroke-width="1.5" marker-end="url(#ax)"/>
+  <line x1="80"  y1="185" x2="942" y2="185" stroke="#334155" stroke-width="1.5" marker-end="url(#ax)"/>
+
+  <!-- y-axis label -->
+  <text x="60" y="107" text-anchor="middle"
+        font-size="16" font-family="STIX Two Math, Georgia, serif"
+        font-style="italic" fill="#1e3a5f"
+        transform="rotate(-90, 60, 107)">f&#x2081;(x)</text>
+
+  <!-- fill under f₁ curve -->
+  <path d="M 80,120
+           C 112,114 142,54  170,58
+           C 198,62  238,116 268,110
+           C 298,104 328,46  360,48
+           C 392,50  428,162 460,156
+           C 484,150 524,60  552,64
+           C 578,68  614,108 640,104
+           C 664,100 696,46  722,48
+           C 748,50  780,154 810,150
+           C 834,147 866,74  892,78
+           C 910,81  928,108 940,104
+           L 940,185 L 80,185 Z"
+        fill="#1e3a5f" fill-opacity="0.10"/>
+
+  <!-- f₁ curve -->
+  <path d="M 80,120
+           C 112,114 142,54  170,58
+           C 198,62  238,116 268,110
+           C 298,104 328,46  360,48
+           C 392,50  428,162 460,156
+           C 484,150 524,60  552,64
+           C 578,68  614,108 640,104
+           C 664,100 696,46  722,48
+           C 748,50  780,154 810,150
+           C 834,147 866,74  892,78
+           C 910,81  928,108 940,104"
+        fill="none" stroke="#1e3a5f" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- ═══════════════════════════════════════════════════
+       Panel 2 — f₂(x)    plot area y: 265 … 425
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- panel background -->
+  <rect x="80" y="215" width="860" height="160" fill="#f0f4f8" rx="3"/>
+
+  <!-- axes -->
+  <line x1="80"  y1="375" x2="80"  y2="213" stroke="#334155" stroke-width="1.5" marker-end="url(#ax)"/>
+  <line x1="80"  y1="375" x2="942" y2="375" stroke="#334155" stroke-width="1.5" marker-end="url(#ax)"/>
+
+  <!-- y-axis label -->
+  <text x="60" y="295" text-anchor="middle"
+        font-size="16" font-family="STIX Two Math, Georgia, serif"
+        font-style="italic" fill="#d97706"
+        transform="rotate(-90, 60, 295)">f&#x2082;(x)</text>
+
+  <!-- fill under f₂ curve (anti-correlated: high f₁ → low f₂, and vice versa) -->
+  <path d="M 80,294
+           C 112,302 142,372 170,370
+           C 198,368 238,286 268,290
+           C 298,294 328,372 360,370
+           C 392,368 428,220 460,224
+           C 484,228 524,370 552,366
+           C 578,362 614,286 640,290
+           C 664,294 696,372 722,370
+           C 748,368 780,220 810,224
+           C 834,228 866,318 892,314
+           C 910,311 928,290 940,292
+           L 940,375 L 80,375 Z"
+        fill="#d97706" fill-opacity="0.20"/>
+
+  <!-- f₂ curve -->
+  <path d="M 80,294
+           C 112,302 142,372 170,370
+           C 198,368 238,286 268,290
+           C 298,294 328,372 360,370
+           C 392,368 428,220 460,224
+           C 484,228 524,370 552,366
+           C 578,362 614,286 640,290
+           C 664,294 696,372 722,370
+           C 748,368 780,220 810,224
+           C 834,228 866,318 892,314
+           C 910,311 928,290 940,292"
+        fill="none" stroke="#d97706" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- ═══════════════════════════════════════════════════
+       Shared x-axis label
+       ═══════════════════════════════════════════════════ -->
+  <text x="510" y="402" text-anchor="middle"
+        font-size="16" font-family="STIX Two Math, Georgia, serif"
+        font-style="italic" fill="#334155">x</text>
+
+  <!-- ═══════════════════════════════════════════════════
+       Trade-off annotations
+       xₐ = 360 : f₁ high, f₂ low
+       x_b = 460 : f₁ low,  f₂ high
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- dashed vertical lines spanning both panels -->
+  <line x1="360" y1="30" x2="360" y2="374" stroke="#1e3a5f"
+        stroke-width="1.2" stroke-dasharray="5,4" opacity="0.65"/>
+  <line x1="460" y1="30" x2="460" y2="374" stroke="#d97706"
+        stroke-width="1.2" stroke-dasharray="5,4" opacity="0.65"/>
+
+  <!-- xₐ label (top, blue) -->
+  <text x="360" y="23" text-anchor="middle"
+        font-size="16" font-family="STIX Two Math, Georgia, serif"
+        font-style="italic" fill="#1e3a5f">x<tspan dy="4" font-size="9">a</tspan><tspan dy="-4"></tspan></text>
+
+  <!-- x_b label (top, amber) -->
+  <text x="460" y="23" text-anchor="middle"
+        font-size="16" font-family="STIX Two Math, Georgia, serif"
+        font-style="italic" fill="#d97706">x<tspan dy="4" font-size="9">b</tspan><tspan dy="-4"></tspan></text>
+
+  <!-- hollow dots on f₁: xₐ = peak, x_b = trough -->
+  <circle cx="360" cy="48"  r="5.5" fill="white" stroke="#1e3a5f" stroke-width="2"/>
+  <circle cx="460" cy="156" r="5.5" fill="white" stroke="#1e3a5f" stroke-width="2"/>
+
+  <!-- hollow dots on f₂: xₐ = trough, x_b = peak -->
+  <circle cx="360" cy="370" r="5.5" fill="white" stroke="#d97706" stroke-width="2"/>
+  <circle cx="460" cy="224" r="5.5" fill="white" stroke="#d97706" stroke-width="2"/>
+
+  <!-- ═══════════════════════════════════════════════════
+       Mid-panel annotation
+       ═══════════════════════════════════════════════════ -->
+  <text x="325" y="203" text-anchor="middle"
+        font-size="16" font-family="Georgia, serif">
+    <tspan fill="#1e3a5f">f&#x2081;&#x2191;</tspan><tspan fill="#334155">, </tspan><tspan fill="#d97706">f&#x2082;&#x2193;</tspan>
+  </text>
+  <text x="495" y="203" text-anchor="middle"
+        font-size="16" font-family="Georgia, serif">
+    <tspan fill="#1e3a5f">f&#x2081;&#x2193;</tspan><tspan fill="#334155">, </tspan><tspan fill="#d97706">f&#x2082;&#x2191;</tspan>
+  </text>
+
+</svg>

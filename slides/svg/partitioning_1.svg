@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 50 340 340"
+     style="background:#f9fbff;">
+
+  <!-- plot background -->
+  <rect x="80" y="100" width="260" height="260" fill="#f0f4ff" stroke="#94a3b8" stroke-width="1"/>
+
+  <!-- HV region (orange staircase steps) -->
+  <!-- Step 1: [0,2]x[0,8] -->
+  <rect x="80"  y="152" width="52"  height="208" fill="#ffcb93"/>
+  <!-- Step 2: [2,5]x[0,5] -->
+  <rect x="131" y="230" width="79"  height="130" fill="#ffcb93"/>
+  <!-- Step 3: [5,8]x[0,2] -->
+  <rect x="209" y="308" width="79"  height="52"  fill="#ffcb93"/>
+
+  <!-- S cells (light blue, non-dominated improvement region) -->
+  <!-- S1: [0,2]x[8,10] -->
+  <rect x="80"  y="100" width="52"  height="52"  fill="#93c5fd" opacity="0.3"/>
+  <!-- S2: [2,5]x[5,10] -->
+  <rect x="132" y="100" width="78"  height="130" fill="#93c5fd" opacity="0.3"/>
+  <!-- S3: [5,8]x[2,10] -->
+  <rect x="210" y="100" width="78"  height="208" fill="#93c5fd" opacity="0.3"/>
+  <!-- S4: [8,10]x[0,10] -->
+  <rect x="288" y="100" width="52"  height="260" fill="#93c5fd" opacity="0.3"/>
+
+  <!-- partition lines (dashed) at Pareto x- and y-coordinates -->
+  <line x1="132" y1="100" x2="132" y2="360" stroke="#94a3b8" stroke-width="0.9" stroke-dasharray="4,3"/>
+  <line x1="210" y1="100" x2="210" y2="360" stroke="#94a3b8" stroke-width="0.9" stroke-dasharray="4,3"/>
+  <line x1="288" y1="100" x2="288" y2="360" stroke="#94a3b8" stroke-width="0.9" stroke-dasharray="4,3"/>
+
+
+  <!-- HV staircase boundary -->
+  <polyline points="80,360 80,152 132,152 132,230 210,230 210,308 288,308 288,360"
+            fill="none" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- bounding box outline -->
+  <rect x="80" y="100" width="260" height="260" fill="none" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- axes -->
+  <line x1="68" y1="360" x2="358" y2="360" stroke="#1e293b" stroke-width="1.8"/>
+  <line x1="80" y1="370" x2="80"  y2="82"  stroke="#1e293b" stroke-width="1.8"/>
+  <polygon points="355,357 361,360 355,363" fill="#1e293b"/>
+  <polygon points="77,85 80,79 83,85"       fill="#1e293b"/>
+  <text x="364" y="364" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1e293b">f<tspan dy="4" font-size="10">1</tspan></text>
+  <text x="69"  y="77"  font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1e293b">f<tspan dy="4" font-size="10">2</tspan></text>
+
+  <!-- reference point r at origin -->
+  <circle cx="80" cy="360" r="4" fill="#64748b"/>
+  <text x="62" y="375" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">r</text>
+
+  <!-- Pareto points y1=(2,8), y2=(5,5), y3=(8,2) -->
+  <circle cx="132" cy="152" r="5" fill="#316281"/>
+  <circle cx="210" cy="230" r="5" fill="#316281"/>
+  <circle cx="288" cy="308" r="5" fill="#316281"/>
+  <text x="138" y="149" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#316281">y<tspan dy="4" font-size="10">1</tspan></text>
+  <text x="216" y="227" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#316281">y<tspan dy="4" font-size="10">2</tspan></text>
+  <text x="294" y="305" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#316281">y<tspan dy="4" font-size="10">3</tspan></text>
+
+  <!-- S_i labels (centered inside each cell) -->
+  <text x="106" y="131" text-anchor="middle" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1e40af">S<tspan dy="4" font-size="10">1</tspan></text>
+  <text x="171" y="168" text-anchor="middle" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1e40af">S<tspan dy="4" font-size="10">2</tspan></text>
+  <text x="249" y="208" text-anchor="middle" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1e40af">S<tspan dy="4" font-size="10">3</tspan></text>
+  <text x="314" y="233" text-anchor="middle" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1e40af">S<tspan dy="4" font-size="10">4</tspan></text>
+
+  <!-- l_i labels at lower-left corners of each S_i cell -->
+  <!-- l1 = (0,8) svg(80,152): on y-axis -->
+  <circle cx="80"  cy="152" r="2.5" fill="#475569"/>
+  <text x="74" y="156" text-anchor="end" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">l<tspan dy="3" font-size="10">1</tspan></text>
+  <!-- l2 = (2,5) svg(132,230) -->
+  <circle cx="132" cy="230" r="2.5" fill="#475569"/>
+  <text x="128" y="244" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">l<tspan dy="3" font-size="10">2</tspan></text>
+  <!-- l3 = (5,2) svg(210,308) -->
+  <circle cx="210" cy="308" r="2.5" fill="#475569"/>
+  <text x="206" y="322" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">l<tspan dy="3" font-size="10">3</tspan></text>
+  <!-- l4 = (8,0) svg(288,360): on x-axis -->
+  <circle cx="288" cy="360" r="2.5" fill="#475569"/>
+  <text x="284" y="376" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">l<tspan dy="3" font-size="10">4</tspan></text>
+
+  <!-- u_i labels at upper-right corners of each S_i cell -->
+  <!-- u1 = (2,10) svg(132,100): on top boundary -->
+  <circle cx="132" cy="100" r="2.5" fill="#475569"/>
+  <text x="126" y="93" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">u<tspan dy="3" font-size="10">1</tspan></text>
+  <!-- u2 = (5,10) svg(210,100) -->
+  <circle cx="210" cy="100" r="2.5" fill="#475569"/>
+  <text x="204" y="93" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">u<tspan dy="3" font-size="10">2</tspan></text>
+  <!-- u3 = (8,10) svg(288,100) -->
+  <circle cx="288" cy="100" r="2.5" fill="#475569"/>
+  <text x="282" y="93" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">u<tspan dy="3" font-size="10">3</tspan></text>
+  <!-- u4 = (10,10) svg(340,100) -->
+  <circle cx="340" cy="100" r="2.5" fill="#475569"/>
+  <text x="334" y="93" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#475569">u<tspan dy="3" font-size="10">4</tspan></text>
+
+  <!-- HV(A) label inside the orange region -->
+  <text x="165" y="280" text-anchor="middle" font-size="16" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#9a3412">HV(Y)</text>
+
+</svg>

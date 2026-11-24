@@ -1,0 +1,1522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOBO Tutorial</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" />
+  <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --r-heading-text-transform: none;
+      --r-main-font-size: 30px;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: #4d0030;
+    }
+
+    .reveal section {
+      text-align: left;
+    }
+
+    .reveal .center {
+      text-align: center;
+    }
+
+    .reveal small {
+      color: #555;
+    }
+
+    .figure-wrap {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .figure-wrap svg {
+      width: 100%;
+      max-width: 980px;
+      height: auto;
+      border: 1px solid #d5dbe3;
+      border-radius: 10px;
+      background: #f9fbff;
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-size: 0.62em;
+      color: #4a5568;
+      text-align: center;
+    }
+
+    .def-block {
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 0.6em 0;
+      font-size: 0.82em;
+      box-shadow: 0 1px 4px rgba(16,55,92,0.10);
+    }
+    .def-block .def-title {
+      background: #830051;
+      color: #fff;
+      padding: 0.28em 0.8em;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.01em;
+    }
+    .def-block .def-body {
+      background: #efe3eb;
+      color: #4d0030;
+      padding: 0.55em 0.85em;
+      font-style: italic;
+    }
+
+    /* ── General color block ──────────────────────────────────────
+       Override any variable inline on the element, e.g.:
+         <div class="color-block"
+              style="--cb-title-bg:#7c3aed; --cb-title-color:#fff;
+                     --cb-body-bg:#ede9fe;  --cb-body-color:#2e1065;">
+           <div class="block-title">Remark</div>
+           <div class="block-body">…</div>
+         </div>
+    ─────────────────────────────────────────────────────────── */
+    .color-block {
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 0.6em 0;
+      font-size: 0.82em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    }
+    .color-block .block-title {
+      background: var(--cb-title-bg, #003865);
+      color:      var(--cb-title-color, #fff);
+      padding: 0.28em 0.8em;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .color-block .block-body {
+      background: var(--cb-body-bg,   #dbeafe);
+      color:      var(--cb-body-color, #1e293b);
+      padding: 0.55em 0.85em;
+    }
+
+    /* ── Slide footer with references ────────────────────────────
+       Usage:
+         <div class="slide-footer">
+           Knowles (2005) · <em>ParEGO</em>, TELO.
+           Daulton et al. (2020) · <em>qEHVI</em>, NeurIPS.
+         </div>
+    ─────────────────────────────────────────────────────────── */
+    .slide-footer {
+      border-top: 1px solid #d1d5db;
+      margin-top: 1.2em;
+      padding-top: 0.4em;
+      font-size: 0.48em;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    .slide-footer a {
+      color: #94a3b8;
+    }
+
+    .section-divider {
+      background: #830051 !important;
+      color: #fff !important;
+    }
+    .section-divider h2 {
+      color: #fff !important;
+      font-size: 1.5em;
+      margin: 0 0 0.3em;
+    }
+    .section-divider h3 {
+      color: #f0ab00 !important;
+      font-size: 1.2em;
+      margin: 0 0 0.3em;
+    }
+    .section-divider p {
+      color: #f0ab00;
+      font-size: 0.72em;
+      margin: 0;
+    }
+
+    .subsection-divider {
+      background: #9db0ac !important;
+      color: #fff !important;
+    }
+    .subsection-divider h2 {
+      color: #830051 !important;
+      font-size: 1.5em;
+      margin: 0 0 0.3em;
+    }
+    .subsection-divider p {
+      color: #fff;
+      font-size: 0.72em;
+      margin: 0;
+    }
+
+    /* ── Summary slide ────────────────────────────────────────────
+       Usage:
+         <section class="summary-slide">
+           <h2>Summary</h2>
+           …content…
+         </section>
+       A warm off-white background with a gold top accent bar and
+       an indigo heading colour — distinct from regular white slides
+       and the dark section-divider style.
+    ─────────────────────────────────────────────────────────── */
+    .summary-slide {
+      background: #faf7f2 !important;
+      /* border-top: 10px solid #c9963a !important; */
+    }
+    .summary-slide h2,
+    .summary-slide h3 {
+      color: #003865 !important;
+      letter-spacing: -0.01em;
+    }
+    .summary-slide h2::after {
+      content: '';
+      display: block;
+      width: 2.8em;
+      height: 3px;
+      /* background: #c9963a; */
+      border-radius: 2px;
+      margin-top: 0.2em;
+    }
+    .summary-slide li {
+      margin-bottom: 0.25em;
+    }
+
+    /* Spaced lists: adds vertical gap between consecutive list items */
+    .spaced-list { line-height: 1.25; padding-left: 1.2em; }
+    .spaced-list > li + li { margin-top: 0.6em; }
+    /* Apply a small vertical gap between all list items in slides */
+    .reveal ul { line-height: 1.25; }
+    .reveal ul > li + li { margin-top: 0.6em; }
+
+    /* Title slide: full-bleed two-column layout */
+    .reveal section.title-slide {
+      padding: 0 !important;
+      overflow: hidden;
+    }
+    .title-slide .ts-wrapper {
+      display: flex;
+      width: 1100px;
+      height: 720px;
+      margin: 0;
+    }
+    .title-slide .ts-bar {
+      flex: 0 0 150px;
+      background: #830051;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 1.6em;
+    }
+    .title-slide .ts-bar img {
+      width: 180px;
+      height: auto;
+    }
+    .title-slide .ts-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.8em 3em 2em 2.8em;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<!-- TITLE -->
+      <section class="title-slide">
+        <div class="ts-wrapper">
+
+          <!-- LEFT: magenta bar -->
+          <div class="ts-bar">
+            <!-- <img src="logos/AstraZeneca_Symbol_digital_main.svg" /> -->
+          </div>
+
+          <!-- RIGHT: title content -->
+          <div class="ts-content">
+            <h1 style="font-size:1.5em; line-height:1.25; color:#4d0030; margin:0 0 0.5em 0;">
+              A Tutorial on<br>Multi-objective Bayesian Optimization
+            </h1>
+            <h2 style="font-size:0.78em; font-weight:400; color:#3f4444; margin:0 0 1.6em 0;">
+              Robotics and AI for Materials Chemistry Winter School · University of Liverpool
+            </h2>
+            <div style="border-top:2px solid #830051; padding-top:0.7em; font-size:0.68em; color:#9db0ac;">
+              Alexandra Gessner &nbsp;·&nbsp; AstraZeneca &nbsp;·&nbsp; 23.11.2026
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+
+
+<!-- MOTIVATION -->
+      <section style="text-align:center;">
+        <h2 style="margin-bottom:0.2em;">Roadmap</h2>
+        <!-- <p style="color:#64748b; margin-top:0; margin-bottom:1em;">How we'll spend the tutorial time</p> -->
+
+        <div style="display:flex; flex-direction:column; gap:0.5em; justify-content:center; align-items:center; width:100%;">
+          <div style="width:min(840px,92%); max-width:840px; background:#ffffff; border-radius:10px; box-shadow:0 6px 18px rgba(16,24,40,0.06); padding:0.6em 0.9em; text-align:left;">
+            <div style="display:flex; align-items:center; gap:0.6em;">
+              <div style="width:36px; height:36px; border-radius:50%; background:#9db0ac; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95em;">0</div>
+              <div>
+                <div style="font-weight:700; color:#9db0ac;">Introduction & Motivation</div>
+                <!-- <div style="color:#475569; font-size:0.86em; margin-top:0.15em;"></div> -->
+              </div>
+            </div>
+          </div>
+
+          <div style="width:min(840px,92%); max-width:840px; background:#ffffff; border-radius:10px; box-shadow:0 6px 18px rgba(16,24,40,0.06); padding:0.6em 0.9em; text-align:left;">
+            <div style="display:flex; align-items:center; gap:0.6em;">
+              <div style="width:36px; height:36px; border-radius:50%; background:#830051; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95em;">1</div>
+              <div>
+                <div style="font-weight:700; color:#830051;">Multi-objective optimization definitions</div>
+                <!-- <div style="color:#475569; font-size:0.86em; margin-top:0.15em;"></div> -->
+              </div>
+            </div>
+          </div>
+
+          <div style="width:min(840px,92%); max-width:840px; background:#ffffff; border-radius:10px; box-shadow:0 6px 18px rgba(16,24,40,0.06); padding:0.6em 0.9em; text-align:left;">
+            <div style="display:flex; align-items:center; gap:0.6em;">
+              <div style="width:36px; height:36px; border-radius:50%; background:#830051; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95em;">2</div>
+              <div>
+                <div style="font-weight:700; color:#830051;">Multi-objective Bayesian optimization</div>
+                <!-- <div style="color:#475569; font-size:0.86em; margin-top:0.15em;"></div> -->
+              </div>
+            </div>
+          </div>
+
+          <div style="width:min(840px,92%); max-width:840px; background:#ffffff; border-radius:10px; box-shadow:0 6px 18px rgba(16,24,40,0.06); padding:0.6em 0.9em; text-align:left;">
+            <div style="display:flex; align-items:center; gap:0.6em;">
+              <div style="width:36px; height:36px; border-radius:50%; background:#830051; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95em;">3</div>
+              <div>
+                <div style="font-weight:700; color:#830051;">MOBO in practice</div>
+                <!-- <div style="color:#475569; font-size:0.86em; margin-top:0.15em;"></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Scientific motivation: Drug design</h2>
+        <div class="figure-wrap">
+          <img src="svg/drug_discovery.svg"
+               alt="Drug discovery pipeline"
+               style="width:100%; max-width:1200px; height:auto; border:1px solid #d5dbe3; border-radius:10px; background:#f9fbff;" />
+        </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Lead optimization</h2>
+        <div style="display:flex; gap:2em; align-items:flex-start;">
+
+          <!-- left: text -->
+          <div style="flex:1; font-size:0.78em; padding-top:0.3em;">
+            <p><strong>Lead optimization</strong> is inherently a multi-objective problem: we want to find molecules that are simultaneously:</p>
+            <ul style="margin:0 0 0.9em 1em;">
+              <li><strong>potent</strong> — high binding affinity / efficacy</li>
+              <li><strong>safe</strong> — low toxicity, good selectivity</li>
+              <li><strong>manufacturable</strong> — stable, soluble, expressible</li>
+              <li><strong>novel</strong> — patentable, diverse from known compounds</li>
+            </ul>
+            <p>Wet-lab experiments are expensive and take a lot of time.</p>
+
+            <div style="margin-top:0.7em; padding:0.55em 0.9em; background:#fdf0f6; border-left:4px solid #830051; border-radius:0 8px 8px 0; color:#4d0030; font-weight:600;">
+              We want to take a Bayesian approach to efficiently select candidates to send to the lab.
+            </div>
+          </div>
+
+          <!-- right: figure -->
+          <figure style="margin:0; flex:0 0 auto; text-align:center;">
+            <img src="svg/MOBO_motivation.svg" alt="Lead optimization"
+                 style="width:380px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+            <figcaption style="font-size:0.58em; color:#475569; margin-top:5px;">Lead optimization for drug design</figcaption>
+          </figure>
+
+        </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+
+    <!-- MOO SETTING AND KEY DEFINITIONS -->
+      <section class="section-divider" style="text-align:center;">
+        <div style="width:48px; height:48px; border-radius:50%; background:#fff; color:#830051; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.5em; margin:0 auto 0.5em;">1</div>
+        <h2>Multi-Objective Optimization (MOO)<br> Setting and Key Definitions</h2>
+        <p> Dominance · Pareto front · Trade-offs </p>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Problem Setting</h2>
+        <p>
+        We want to simultaneously optimize (here w.l.o.g. maximize) $M$ competing black-box functions 
+        $$\mathbf{f}(\mathbf{x}) = (f_1(\mathbf{x}), \dots, f_M(\mathbf{x})) \in \mathcal{Y} \subseteq \mathbb{R}^M,$$
+        as a function of a design variable $\mathbf{x} \in \mathcal{X} \subseteq \mathbb{R}^D$.
+        </p>
+
+
+        <div class="fragment" style="display:block; margin:1.5em auto 0; background:#dee7d6; border-left:4px solid #466b24; border-radius:0 4px 4px 0; padding:0.4em 0.7em; color:#2b4412; max-width:750px;">
+          <p style="margin:0; text-align:left;"><strong>Notation</strong></p>
+          <p style="margin:0 0 0.15em; text-align:left;">$M$ = number of objectives</p>
+          <p style="margin:0 0 0.15em; text-align:left;">$D$ = number of input dimensions</p>
+        </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h3>What does it mean to optimize multiple objectives?</h3>
+        <img src="svg/two_funs.svg" style="width:100%; max-width:980px; border:1px solid #d5dbe3; border-radius:10px;" />
+        <p>Improving one objective may worsen another  ⭢  we need to find <strong>trade-offs</strong>.</p>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Dominance</h2>
+        <div class="def-block">
+          <div class="def-title">Definition: Dominated and non-dominated points</div>
+          <div class="def-body">
+            <p style="margin:0 0 0.4em;">Let $\mathbf{y}, \mathbf{y}' \in \mathcal{Y}$ be observed vectors. We say that $\mathbf{y}$ <strong>dominates</strong> $\mathbf{y}'$, written $\mathbf{y} \succ \mathbf{y}'$,
+          when $\mathbf{y}$ is at least as good in every objective and strictly better in at least one:</p>
+            <p style="text-align:center; margin:0;">
+              $$\mathbf{y} \succ \mathbf{y}' \;\iff\; \forall\,m:\; y_m \geq y'_m \;\;\text{and}\;\;\exists\,m':\; y_{m'} > y'_{m'}$$
+            </p>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:22px; align-items:flex-start;">
+
+          <!-- ── Plot 1: y dominates y' ──────────────────────────────── -->
+          <figure style="margin:0; text-align:center;">
+            <img src="svg/dominance_1.svg" alt="y dominates y'"
+                 style="width:240px;height:auto;border:1px solid #d5dbe3;border-radius:12px;display:block;" />
+            <figcaption style="font-size:0.62em;color:#334155;margin-top:5px;">
+              $\mathbf{y} \succ \mathbf{y}'$
+            </figcaption>
+          </figure>
+
+          <!-- ── Plot 2: y does NOT dominate y' ─────────────────────── -->
+          <figure style="margin:0; text-align:center;">
+            <img src="svg/dominance_2.svg" alt="y and y' are incomparable"
+                 style="width:240px;height:auto;border:1px solid #d5dbe3;border-radius:12px;display:block;" />
+            <figcaption style="font-size:0.62em;color:#334155;margin-top:5px;">
+              $\mathbf{y} \not\succ \mathbf{y}',\;\mathbf{y}' \not\succ \mathbf{y}$
+            </figcaption>
+          </figure>
+
+          <!-- ── Plot 3: y & y' non-dom; y'' dominated by y' not y ──── -->
+          <figure style="margin:0; text-align:center;">
+            <img src="svg/dominance_3.svg" alt="y' dominates y'' but y does not"
+                 style="width:240px;height:auto;border:1px solid #d5dbe3;border-radius:12px;display:block;" />
+            <figcaption style="font-size:0.62em;color:#334155;margin-top:5px;">
+              $\mathbf{y}' \succ \mathbf{y}'',\;\mathbf{y} \not\succ \mathbf{y}''$
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>The Pareto set</h2>
+        <div class="def-block">
+          <div class="def-title">Definition: Pareto set</div>
+          <div class="def-body">
+            <p style="margin:0 0 0.4em;">The Pareto set \(\mathcal{P}\) is the set of objective vectors \(\mathbf{y} \in \mathcal{Y}\) that are not dominated by any other vector in \(\mathcal{Y}\):</p>
+            <p style="text-align:center; margin:0;">
+              \[\mathcal{P} = \{ \mathbf{y} \in \mathcal{Y} : \nexists\, \mathbf{y}' \in \mathcal{Y} \text{ such that } \mathbf{y}' \succ\mathbf{y} \}\]
+            </p>
+          </div>
+        </div>
+
+        <div class="fragment" style="display:block; margin:1.5em auto 0; background:#dee7d6; border-left:4px solid #466b24; border-radius:0 4px 4px 0; padding:0.4em 0.7em; color:#2b4412; max-width:750px;">
+          <p style="margin:0; text-align:left;"><strong>Notation</strong></p>
+          <p style="margin:0 0 0.15em; text-align:left;">\(\mathcal{P}\) = Pareto set (in objective space)</p>
+          <p style="margin:0 0 0.15em; text-align:left;">\(\mathcal{P}_\mathcal{D}\) = Pareto set based on data \(\mathcal{D} = \{(\mathbf{x}_n, \mathbf{y}_n)\}_{n=1}^N\)</p>
+          <!-- <p style="margin:0; text-align:left;">\(X_\mathcal{P} \subset \mathcal{X}\) = Pareto set in input space</p>
+          <p style="margin:0; text-align:left;">\(Y_\mathcal{P} \subset \mathcal{Y}\) = Pareto set in objective space</p> -->
+        </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Pareto frontier</h2>
+        <p>A point is Pareto-optimal if no other feasible point improves one objective without worsening at least one other objective.</p>
+        <div class="figure-wrap">
+          <img src="svg/pareto_frontier.svg"
+               alt="Toy Pareto frontier in two objectives"
+               style="width:100%; max-width:980px; height:auto; border:1px solid #d5dbe3; border-radius:10px; background:#f9fbff;" />
+        </div>
+        <!-- <p class="caption">2D toy objective space: each frontier point is a different trade-off.</p> -->
+    </textarea>  
+    </section>
+
+<!-- ================================================================================================================== -->
+<!-- MOBO -->
+<!-- ================================================================================================================== -->
+    <section class="section-divider" style="text-align:center;">
+      <div style="width:48px; height:48px; border-radius:50%; background:#fff; color:#830051; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.5em; margin:0 auto 0.5em;">2</div>
+        <h2>Multi-Objective Bayesian Optimization (MOBO)</h2>
+        <p> Scalarization-based · Hypervolume-based · Information-based </p>
+    </section>
+    <!-- GP MODELS -->
+      <section data-visibility="hidden">
+        <section>
+        <h2>Gaussian process model</h2>
+        <p style="font-size:0.82em;">If we assume that objectives are correlated, we can use a <strong>multi-output GP</strong> model with a joint covariance structure across objectives, i.e.,</p>
+        <div class="color-block"
+             style="--cb-title-bg:#1e3a5f; --cb-title-color:#fff;
+                    --cb-body-bg:#f0f7ff;  --cb-body-color:#1e293b;">
+          <div class="block-title">Multi-output GP for correlated objectives</div>
+          <div class="block-body">
+            <p style="text-align:center; margin:0 0 0.5em;">\[\mathbf{f} \sim \mathcal{GP}(\boldsymbol{\mu}, \mathbf{K})\]</p>
+            <p style="margin:0 0 0.25em;">\(\boldsymbol{\mu}: \mathbb{R}^D \to \mathbb{R}^M\): vector of mean functions</p>
+            <p style="margin:0;">\(\mathbf{K}: \mathbb{R}^D \times \mathbb{R}^D \to \mathbb{R}^{M \times M}\): joint covariance function across objectives</p>
+          </div>
+        </div>
+
+        <p style="font-size:0.82em;">Multi-output GPs are particularly relevant for <strong>multi-task</strong> and <strong>multi-fidelity</strong> learning scenarios.</p>
+        <div class="slide-footer">
+          Alvarez et al. (2012) · <em>Kernels for vector-valued functions: A review.</em>, Foundations and Trends® in Machine Learning 4.3 (2012): 195-266.
+        </div>
+      </section>
+
+        <section>
+          <h2>Multi-task and multi-fidelity optimization</h2>
+          <div class="color-block"
+              style="--cb-title-bg:#1e3a5f; --cb-title-color:#fff;
+                      --cb-body-bg:#f0f7ff;  --cb-body-color:#1e293b;">
+            <div class="block-title">Multi-task optimization</div>
+            <div class="block-body">
+              <p style="text-align:left; margin:0 0 0.5em;">
+                Solve multiple related tasks simultaneously or consecutively by modeling them as correlated outputs of a multi-output GP.
+              </p>
+            </div>
+          </div>
+          <div class="color-block"
+              style="--cb-title-bg:#1e3a5f; --cb-title-color:#fff;
+                      --cb-body-bg:#f0f7ff;  --cb-body-color:#1e293b;">
+            <div class="block-title">Multi-fidelity optimization</div>
+            <div class="block-body">
+              <p style="text-align:left; margin:0 0 0.5em;">
+                Optimize a high-fidelity objective by leveraging cheaper low-fidelity approximations, modeled as correlated outputs of a multi-output GP.
+                For example, simulations at different resolutions.
+              </p>
+            </div>
+          </div>
+
+        </section>
+      </section>
+
+      <section>
+        <h2>Gaussian process model</h2>
+        <!-- <p>The simpler alternative that we'll go with is to model each objective independently with a separate GP, i.e.,</p> -->
+        <p>Model each objective independently with a separate GP, i.e.,</p>
+        <div class="color-block"
+             style="--cb-title-bg:#a96924; --cb-title-color:#fff;
+                    --cb-body-bg:#fbe5cd;  --cb-body-color:#1e293b;">
+          <div class="block-title">Independent GPs for each objective</div>
+          <div class="block-body">
+            <p style="text-align:center; margin:0 0 0.5em;">\[f_m \sim \mathcal{GP}(\mu_m, k_m),\quad m=1,\dots,M\]</p>
+            <p style="margin:0 0 0.25em;">\(\mu_m: \mathbb{R}^D \to \mathbb{R}\): mean function</p>
+            <p style="margin:0;">\(k_m: \mathbb{R}^D \times \mathbb{R}^D \to \mathbb{R}\): covariance function of the \(m\)-th objective</p>
+          </div>
+        </div>
+        <p>Correlated models are more commonly used in <strong>multi-task learning</strong> and <strong>multi-fidelity optimization</strong>.</p>
+      </section>
+
+             <section>
+        <h2>The MOBO loop</h2>
+        <div style="font-size:0.74em; border:1px solid #d1d5db; border-radius:8px; overflow:hidden; margin-top:0.5em;">
+          <div style="background:#10375c; color:#fff; padding:0.3em 0.8em; font-weight:600; letter-spacing:0.01em;">
+            <strong>Algorithm</strong>: MOBO &emsp;
+            <span style="font-weight:400; font-size:0.9em;">Input: budget \(N\), acquisition \(\alpha\), initial data \(\mathcal{D}_0 = \{(\mathbf{x}_i, \mathbf{f}(\mathbf{x}_i))\}_{i=1}^{n_0}\)</span>
+          </div>
+          <div style="background:#f8fafc; color:#1e293b; padding:0.4em 0.85em; font-family:'Courier New',monospace; line-height:1.7;">
+            <div><strong>for</strong> \(n = 1, \ldots, N\) <strong>do</strong></div>
+            <div style="padding-left:1.4em;">
+              <div>1.&ensp;<em>Fit surrogates</em>: train \(f_m \sim \mathcal{GP}(\mu_m, k_m)\) on \(\mathcal{D}_{n-1}\) for each \(m = 1,\dots,M\)</div>
+              <div>2.&ensp;<em>Select next point</em>: \(\mathbf{x}_{\mathrm{new}} \leftarrow \arg\max_{\mathbf{x} \in \mathcal{X}}\; \textcolor{#ca8a04}{\alpha(\mathbf{x} \mid \mathcal{D}_{n-1})}\)</div>
+              <div>3.&ensp;<em>Evaluate</em>: observe \(\mathbf{y}_{\mathrm{new}} = \mathbf{f}(\mathbf{x}_{\mathrm{new}})\)</div>
+              <div>4.&ensp;<em>Update</em>: \(\mathcal{D}_n \leftarrow \mathcal{D}_{n-1} \cup \{(\mathbf{x}_{\mathrm{new}},\; \mathbf{y}_{\mathrm{new}})\}\)</div>
+            </div>
+            <div><strong>end for</strong></div>
+            <div style="margin-top:0.3em;"><strong>return</strong> Pareto set \(\mathcal{P}_{\mathcal{D}_N}\)</div>
+          </div>
+        </div>
+
+        <div class="fragment" style="display:block; margin:1.5em auto 0; background:#fef9c3; border-left:4px solid #ca8a04; border-radius:0 4px 4px 0; padding:0.4em 0.7em; color:#713f12; max-width:750px;">
+          <p style="margin:0; text-align:center;">What should the acquisition function \(\alpha\) be?</p>
+        </div>
+        <!-- <div style="display:flex; gap:1em; margin-top:0.8em; font-size:0.74em;">
+          <div style="flex:1; background:#f0f7ff; border-left:3px solid #3b82f6; border-radius:0 4px 4px 0; padding:0.4em 0.7em; color:#1e3a5f;">
+            <strong>Step 2 is where methods differ</strong> — the acquisition \(\alpha\) encodes what to query next:<br>
+            ParEGO uses scalarized EI · EHVI uses hypervolume improvement · PESMO/MESMO use information gain
+          </div>
+          <div style="flex:0 0 auto; background:#fef9c3; border-left:3px solid #ca8a04; border-radius:0 4px 4px 0; padding:0.4em 0.7em; color:#713f12; max-width:260px;">
+            <strong>Step 3 is the bottleneck</strong> — each evaluation may take hours or days in practice
+          </div>
+        </div> -->
+      </section>
+
+
+<!-- Scalarization-based MOBO -->
+       <section class="subsection-divider" style="text-align:center;">
+        <h2>Scalarization-based acquisition strategies</h2>
+        <p>Weighted sum · Chebyshev · ParEGO</p>
+      </section>
+
+        <section>
+            <h2>From multi-objective to single-objective</h2>
+
+            <p>Turn vector-valued objective $\mathbf{f} = (f_1,\dots, f_M)$ into a single objective</p>
+            \[g_\theta (\mathbf{x}) = s_\theta(\mathbf{f}(\mathbf{x}))\]
+            <p>with scalarization function $s_\theta$ and then apply standard BO, e.g. with expected improvement (EI).</p>
+
+            <!-- <ul>
+                <li>weighted sum</li>
+                <li>Chebyshev scalarization</li>
+                <li>ParEGO</li>
+            </ul> -->
+
+            <!-- Pros:
+            - simple, easy to implement
+
+            Cons:
+            - may miss parts of frontier if scalarization is not chosen well -->
+      </section>
+       <section>
+            <h2>Weighted sum</h2>
+
+            <p>The simplest approach is a weighted sum</p>
+            \[g_\theta (\mathbf{x}) = \sum_{m=1}^M \theta_m f_m(\mathbf{x})\]
+            <p>with the weights $\theta_m$ determining the importance of each objective. Typically, $\sum_m \theta_m = 1$.</p>
+
+            <!-- <p>Two options</p> -->
+            <div style="display:flex; gap:1.4em; margin-top:0.6em;">
+
+            <!-- Pros -->
+            <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#466b24; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.82em; letter-spacing:0.01em;">
+                Pros
+              </div>
+              <div style="background:#f6ffed; color:#2d4814; padding:0.55em 0.85em; font-size:0.78em; flex:1;">
+                <ul>
+                <li>Simple, straightforward</li>
+                <li>Easy to encode preferences</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Cons -->
+            <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#7f1d1d; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.82em; letter-spacing:0.01em;">
+                Cons
+              </div>
+              <div style="background:#ffebeb; color:#450a0a; padding:0.55em 0.85em; font-size:0.78em; flex:1;">
+                <ul>
+                <li>Misses non-convex parts of the Pareto frontier</li>
+                <li>Sensitive to choice of weights</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+      </section>
+      <section>
+            <h2>Chebyshev scalarization</h2>
+
+            <p>Chevyshev scalarization focuses on reducing the largest weighted shortfall </p>
+            \[g_\theta (\mathbf{x}) = \max_{m=1,\dots, M} \theta_m (f_m^{\star} - f_m(\mathbf{x}))\]
+            <p>of the objectives w.r.t. an "ideal" point $\mathbf{f}^\star = (f_1^{\star}, \dots, f_M^{\star})$</p>
+
+
+            <div style="display:flex; gap:1.4em; margin-top:0.6em;">
+
+            <!-- Pros -->
+            <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#466b24; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.82em; letter-spacing:0.01em;">
+                Pros
+              </div>
+              <div style="background:#f6ffed; color:#2d4814; padding:0.55em 0.85em; font-size:0.78em; flex:1;">
+                Can find non-convex parts of the Pareto frontier
+              </div>
+            </div>
+
+            <!-- Cons -->
+            <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#7f1d1d; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.82em; letter-spacing:0.01em;">
+                Cons
+              </div>
+              <div style="background:#ffebeb; color:#450a0a; padding:0.55em 0.85em; font-size:0.78em; flex:1;">
+                Non-differentiable, which makes optimizing the acquisition more challenging
+              </div>
+            </div>
+
+          </div>
+            <!-- <p>Two options</p> -->
+            <!-- <ul>
+                <li><strong>Pros:</strong> Does find non-convex parts of the Pareto frontier</li>
+                <li><strong>Cons:</strong> Non-differentiable, which makes </li>
+                <li>Compute $g_\lambda (\mathbf{x})$ for every observation and model with a GP</li> -->
+                <!-- <li>Model $f_m$ with independent GPs, then the marginal over the weighted sum has moments</li> -->
+                <!-- \[
+                \mu_\lambda = \sum_{m=1}^M \lambda_m \mu_m\quad \text{and}\quad \sigma^2_\lambda = \sum_{m=1}^M \lambda^2_m \sigma^2_m
+                \] -->
+            </ul>
+      </section>
+
+    <section>
+        <section>
+            <h2>ParEGO: Pareto Efficient Global Optimization</h2>
+            <!-- <p style="font-size:0.82em;">EGO = Efficient Global Optimization</p> -->
+            <p style="font-size:0.82em;">ParEGO uses augmented Chebyshev scalarization:</p>
+            \[ g_\theta(\mathbf{x}) = \min_{m=1,\dots,M} \theta_m f_m(\mathbf{x}) + \rho \sum_{m=1}^M \theta_m f_m(\mathbf{x})  \]
+            <p style="font-size:0.82em;">after normalizing $\mathbf{f}$ based on seen data.</p>
+
+            <p style="font-size:0.82em;">Key steps:</p>
+            <ul style="font-size:0.82em;">
+            <li>Randomly sample scalarization weights each iteration</li>
+            <li>Optimize scalarized objective with EI</li>
+            <!-- <li>Over time, recover diverse Pareto solutions</li> -->
+            </ul>
+            <!-- <p style="font-size:0.82em; margin-top:0.6em;"><strong>Practical note:</strong> strong baseline for low to moderate number of objectives</p> -->
+            <div class="slide-footer">
+            Knowles (2005) · <em>ParEGO: A Hybrid Algorithm with On-Line Landscape Approximation for Expensive Multiobjective Optimization Problems</em>, IEEE TELO.
+            </div>
+        </section>
+        <section>
+          <h2>ParEGO Algorithm</h2>
+          <div style="font-size:0.72em; border:1px solid #d1d5db; border-radius:8px; overflow:hidden; margin-top:0.5em;">
+            <div style="background:#10375c; color:#fff; padding:0.3em 0.8em; font-weight:600; letter-spacing:0.01em;">
+              <strong>Algorithm</strong>: ParEGO &emsp;
+              <span style="font-weight:400; font-size:0.9em;">Input: budget \(N\), data \(\mathcal{D}_0\), penalty \(\rho &gt; 0\)</span>
+            </div>
+            <div style="background:#f8fafc; color:#1e293b; padding:0.4em 0.85em; font-family:'Courier New',monospace; line-height:1.65;">
+              <div><strong>for</strong> \(n = 1, \ldots, N\) <strong>do</strong></div>
+              <div style="padding-left:1.4em;">
+                <div>1.&ensp;<em>Sample weights</em>: draw \(u_m \sim \mathrm{Uniform}(0,1)\), set \(\theta_m \leftarrow u_m / \sum_{m'} u_{m'}\)
+                  <span style="color:#94a3b8; font-size:0.88em; font-family:sans-serif;">&ensp;▷ \(\sum_m \theta_m = 1\)</span>
+                </div>
+                <div>2.&ensp;<em>Normalize</em>: \(\tilde{f}_m(\mathbf{x}_i) \leftarrow \tfrac{f_m(\mathbf{x}_i) - \min_j f_m(\mathbf{x}_j)}{\max_j f_m(\mathbf{x}_j) - \min_j f_m(\mathbf{x}_j)}\) for all \(\mathbf{x}_i \in \mathcal{D}_n\)</div>
+                <div>3.&ensp;<em>Scalarize</em>: \(g_\theta(\mathbf{x}_i) \leftarrow \min_m \theta_m \tilde{f}_m(\mathbf{x}_i) + \rho\sum_m \theta_m \tilde{f}_m(\mathbf{x}_i)\)</div>
+                <div>4.&ensp;<em>Fit GP</em> on \(\{(\mathbf{x}_i,\; g_\theta(\mathbf{x}_i))\}_{i=1}^{n}\)</div>
+                <div>5.&ensp;<em>Optimize EI with EA</em>: init population \(P\); repeat select–crossover–mutate using \(\alpha_{\mathrm{EI}}\) as fitness</div>
+                <div style="padding-left:2.2em;">\(\mathbf{x}_{\mathrm{new}} \leftarrow \arg\max_{\mathbf{x}\in P}\;\alpha_{\mathrm{EI}}(\mathbf{x})\)</div>
+                <div>6.&ensp;<em>Evaluate &amp; update</em>: \(\mathcal{D}_{n+1} \leftarrow \mathcal{D}_n \cup \{(\mathbf{x}_{\mathrm{new}},\;\mathbf{f}(\mathbf{x}_{\mathrm{new}}))\}\)</div>
+              </div>
+              <div><strong>end for</strong></div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>ParEGO: Pros and Cons</h2>
+          <div style="display:flex; gap:1.4em; margin-top:0.6em;">
+
+            <!-- Pros -->
+            <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#466b24; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.82em; letter-spacing:0.01em;">
+                Pros
+              </div>
+              <div style="background:#f6ffed; color:#2d4814; padding:0.55em 0.85em; font-size:0.78em; flex:1;">
+                <ul style="margin:0; padding-left:1.1em; line-height:1.7;">
+                  <li>Simple and easy to implement</li>
+                  <li>Only one GP fit per iteration (fast)</li>
+                  <li>Works well for low to moderate \(M\)</li>
+                  <li>Naturally explores diverse trade-offs via random weights \(\boldsymbol{\theta}\)</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Cons -->
+            <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#7f1d1d; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.82em; letter-spacing:0.01em;">
+                Cons
+              </div>
+              <div style="background:#ffebeb; color:#450a0a; padding:0.55em 0.85em; font-size:0.78em; flex:1;">
+                <ul style="margin:0; padding-left:1.1em; line-height:1.7;">
+                  <li>May miss non-convex parts of the Pareto front</li>
+                  <li>Requires tuning penalty parameter \(\rho\)</li>
+                  <li>Coverage of the front depends on how weights are sampled</li>
+                  <li>Needs a gradient-free optimizer (e.g., evolutionary algorithm)</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom highlight -->
+          <div style="margin-top:1em; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.10);">
+            <div style="background:#10375c; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.78em; letter-spacing:0.01em;">
+              Most common baseline for MOBO
+            </div>
+            <div style="background:#bfcedb; color:#10375c; padding:0.45em 0.85em; font-size:0.78em;">
+              ParEGO remains the <strong>most widely used baseline</strong> in MOBO benchmarks — its simplicity and robustness make it a hard-to-beat reference for a small number of objectives.
+            </div>
+          </div>
+        </section>
+    </section>
+
+<!-- HV-based acquisition functions -->
+<!-- ================================================================================================================== -->
+
+      <section class="subsection-divider" style="text-align:center;">
+        <h2>Hypervolume-based acquisition strategies</h2>
+        <p>Hypervolume · HVI · EHVI · PHVI</p>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Hypervolume (HV)</h2>
+        <div style="display:flex; align-items:flex-start; gap:32px;">
+            <div style="flex:1; font-size:0.78em; text-align:left;">
+                <div class="def-block">
+                <div class="def-title">Definition: Hypervolume</div>
+                <div class="def-body">
+                    <p style="margin:0 0 0.4em;">Let $Y\subset \mathcal{Y}$ be a set of observed objective vectors.
+                      We denote the associated Pareto set as \(\mathcal{P}_{Y}\). Let \(r\in\mathbb{R}^M\) be a reference point dominated by all points in \(\mathcal{P}_{Y}\).</p>
+                    <p style="margin:0 0 0.4em;">The hypervolume of $Y$ is the Lebesgue measure of the union of hyperrectangles dominated by the Pareto set and bounded by $r$:</p>
+                    <p style="text-align:center; margin:0;">
+                    \[\text{HV}(Y) = \lambda_M\!\left(\bigcup_{\mathbf{y}\in\mathcal{P}_{Y}} [\mathbf{y},\, r]\right)\]
+                    </p>
+                </div>
+                </div>
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="svg/hv_intuition.svg" alt="Hypervolume"
+                   style="width:360px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+            </figure>
+          </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+
+      <section>
+        <h2>Hypervolume Improvement (HVI)</h2>
+        <div style="display:flex; align-items:flex-start; gap:32px;">
+            <div style="flex:1; font-size:0.78em; text-align:left;">
+                <div class="def-block">
+                <div class="def-title">Definition: Hypervolume improvement</div>
+                <div class="def-body">
+                    <p style="margin:0 0 0.4em;">Let $Y\subset \mathcal{Y}$ be a set of observed objective vectors with Pareto set \(\mathcal{P}_{Y}\) and a candidate point \(\mathbf{y}^\star\), the hypervolume improvement (HVI) measures the increase in hypervolume if \(\mathbf{y}^\star\) is added to \(\mathcal{P}_{Y}\).</p>
+                    <p style="text-align:center; margin:0;">
+                    \[\text{HVI}(\mathbf{y}^\star\mid Y) = \text{HV}(Y \cup \{\mathbf{y}^\star\}) - \text{HV}(Y)\]
+                    </p>
+                </div>
+                </div>
+                <div style="margin-top: 3em;"></div>
+                <p><strong>Note:</strong> HVI is zero for points that are dominated by the current Pareto set \(\mathcal{P}_Y\), and positive for points that expand the dominated region.</p>
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="svg/hvi_2d.svg" alt="Hypervolume"
+                   style="width:360px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+                <figcaption style="font-size:0.58em; color:#475569; margin-top:5px;">Hypervolume added by the new point $y^\star$</figcaption>
+            </figure>
+          </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Expected Hypervolume Improvement (EHVI)</h2>
+        <div style="display:flex; gap:2em; align-items:flex-start;">
+
+          <!-- left: definition + intuition -->
+          <div style="flex:0 0 auto; max-width:400px; font-size:0.78em; padding-top:0.2em;">
+            <div class="def-block">
+              <div class="def-title">Definition: EHVI</div>
+              <div class="def-body">
+                <p style="margin:0 0 0.4em;">The expected hypervolume improvement of a candidate design point \(\mathbf{x}^\star\) over observed points \(Y\) is the expectation of the HVI w.r.t. the predictive distribution of \(\mathbf{f}(\mathbf{x}^\star)\),</p>
+                <p style="text-align:center; margin:0;">\[\text{EHVI}(\mathbf{x}^\star\mid Y) = \mathbb{E}[\text{HVI}(\mathbf{f}(\mathbf{x}^\star)\mid Y)]\]</p>
+              </div>
+            </div>
+            <p><strong>Intuition</strong></p>
+            <p>EHVI quantifies how much a new design point in $\mathcal{X}$ would expand the dominated region in objective space $\mathcal{Y}$ in expectation, assuming noise-free observations.</p>
+          </div>
+
+          <!-- right: figure -->
+          <div style="flex:1; display:flex; justify-content:center; align-items:flex-start;">
+            <figure style="margin:0; text-align:center; width:100%;">
+              <img src="img/EHVI.png"
+                   alt="Expected Hypervolume Improvement diagram"
+                   style="width:100%; border-radius:8px; border:1px solid #d5dbe3;" />
+              <figcaption style="font-size:0.58em; color:#475569; margin-top:5px;">
+                Expected Hypervolume Improvement (EHVI)
+              </figcaption>
+            </figure>
+          </div>
+
+        </div>
+        <div class="slide-footer">
+            Yang et al. "Efficient computation of expected hypervolume improvement using box decomposition algorithms." Journal of Global Optimization 75.1 (2019): 3-34.
+            </div>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+
+      <section>
+        <section>
+          <h2 style="margin-top:0;">Computation of EHVI via partitioning</h2>
+          <div class="fragment"; style="display:flex; align-items:flex-start; gap:32px;">
+            <div style="flex:1; font-size:0.78em; text-align:left;">
+              <h3 style="margin-top:0;">Partitioning the space</h3>
+              <p>Partition the non-dominated space above the Pareto front into axis-aligned <strong>hyperrectangles</strong> \(S_1,\dots,S_K\).</p>
+              <p>Each cell \(S_k\) is bounded below by \(\mathbf{\ell}_k \in\mathbb{R}^M\) and above by \(\mathbf{u}_k \in\mathbb{R}^M\cup \{\mathbf{\infty}\}\).</p>
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="svg/partitioning_1.svg" alt="2D hyperrectangle partitioning"
+                   style="width:400px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+              <figcaption style="font-size:0.52em; color:#475569; margin-top:5px;">Partition into \(S_1,\dots,S_4\) with bounds \(\ell_k\), \(u_k\)</figcaption>
+            </figure>
+          </div>
+          <div class="slide-footer">
+            Yang et al. "Efficient computation of expected hypervolume improvement using box decomposition algorithms." Journal of Global Optimization 75.1 (2019): 3-34.
+            </div>
+        </section>
+        <section>
+          <h3 style="margin-top:0;">HVI via partitioning</h3>
+            <div style="display:flex; align-items:flex-start; gap:32px;">
+            <div style="flex:1; font-size:0.85em; text-align:left;">
+              <div class="def-block">
+                <div class="def-title">Definition: \(\Delta\)-function</div>
+                <div class="def-body">For an objective vector \(\mathbf{y}^{\star}\), define \(\Delta(\mathbf{y}^{\star}, \mathbf{r}, Y)\)
+                as the set of points that are dominated by \(\mathbf{y}^{\star}\), dominate \(\mathbf{r}\), and are not dominated by any point in \(Y\).</div>
+              </div>
+              <div class="fragment"; style="flex:1; font-size:0.85em; text-align:left;">
+              <p>Split the HVI into intersections with the hyperrectangles \(\{S_k\}_{k=1}^K\):</p>
+
+              \[
+              \begin{aligned}
+              \text{HVI}_k &= S_k \cap \Delta(\mathbf{y}^{\star}, \mathbf{r}, \mathcal{P}_Y)\\
+                 &= \prod_{m=1}^{M} [\min(u_k^m, y_m^{\star}) - l_k^m]_{+}
+              \end{aligned}
+              \]
+            </div>
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="svg/partitioning_2.svg" alt="Adding a new point"
+                   style="width:400px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+              <!-- <figcaption style="font-size:0.52em; color:#475569; margin-top:5px;">Partition into \(S_1,\dots,S_4\) with bounds \(\ell_k\), \(u_k\)</figcaption> -->
+            </figure>
+          </div>
+          <div class="fragment"; style="flex:1; font-size:0.78em; text-align:left;">
+            where \([z]_{+} = \max(z, 0)\) ensures that only the portion of \(S_k\) dominated by \(\mathbf{y}^{\star}\) contributes to the HVI.
+            Then the total HVI is the sum of the contributions from each cell:
+            \[\text{HVI}(\mathbf{y}^{\star}, A) = \sum_{k=1}^{K} \prod_{m=1}^{M} [\min(u_k^m, y_m^{\star}) - l_k^m]_{+}\]
+          </div>
+        </section>
+        <section>
+          <h3 style="margin-top:0;">EHVI via partitioning</h3>
+            <div style="display:flex; align-items:flex-start; gap:32px;">
+            <div style="flex:1; font-size:0.78em; text-align:left;">
+              <p>Take the expectation over the surrogate distribution of \(\mathbf{y}^{\star}\):</p>
+              \[
+              \begin{aligned}
+              \text{EHVI}(\mathbf{x}^{\star}\mid Y) &= \mathbb{E}[\text{HVI}(\mathbf{f}(\mathbf{x}^{\star})\mid Y)]\\
+                 &= \sum_{k=1}^{K} \mathbb{E}\left[\prod_{m=1}^{M} [\min(u_k^m, f_m(\mathbf{x}^{\star})) - l_k^m]_{+}\right]
+              \end{aligned}
+              \]
+              This expectation can be computed in closed form if the surrogates are independent GPs, but not for correlated GPs.
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="svg/partitioning_ehvi.svg" alt="EHVI partitioning diagram"
+                   style="width:400px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+              <figcaption style="font-size:0.52em; color:#475569; margin-top:5px;">EHVI is the sum of expected contributions from each cell</figcaption>
+            </figure>
+          </div>
+        </section>
+        <section>
+            <h3 style="margin-top:0;">EHVI via partitioning</h3>
+            For <strong>independent GPs</strong>, the predictive distribution is axis-aligned. Hence, EHVI can be computed in closed form.
+            <!--  -->
+            \[\begin{aligned}
+                \text{EHVI}(\mathbf{x}^{\star}\mid Y)
+                &= \sum_{k=1}^{K} \int_{\mathbb{R}^M} \prod_{m=1}^{M} [\min(u_k^m, f_m^{\star}) - l_k^m]_{+}\ \mathcal{N}(\mathbf{f}^{\star}, \mathbf{\mu}^{\star}, \mathbf{K}^{\star})\, \mathrm{d} \mathbf{f}^{\star}\\
+                &= \sum_{k=1}^{K} \prod_{m=1}^{M} \int_{l_k^m}^{u_k^m} (f_m^{\star} - l_k^m) \mathcal{N}(f_m^{\star}, {\mu}_m^{\star}, \sigma_m^{\star})\, \mathrm{d} f_m^{\star}
+            \end{aligned}\]
+            after a few substitutions...
+           
+
+        </section>
+        <section>
+            <h3 style="margin-top:0;">EHVI via partitioning</h3>
+            ...and using
+             \[
+                \varphi(z) = \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{z^2}{2}\right)\quad \text{and}\quad 
+                \Phi(t) = \int_{-\infty}^t \varphi(z) \mathrm{d}\,z
+            \]
+            the EHVI becomes
+            \[
+            \begin{aligned}
+            \text{EHVI}(\mathbf{x}^{\star}\mid Y) 
+            = \sum_{k=1}^{K} \prod_{m=1}^{M}& 
+            \ \left[\sigma_m \left[\varphi\left(\frac{l_k^m-\mu_m}{\sigma_m}\right) - \varphi\left(\frac{u_k^m-\mu_m}{\sigma_m}\right)\right]\right.\\
+            &+ \left.(\mu_m - l_k^m) \left[\Phi\left(\frac{u_k^m-\mu_m}{\sigma_m}\right) - \Phi\left(\frac{l_k^m-\mu_m}{\sigma_m}\right)\right]\right].
+            \end{aligned}
+            \]
+        
+            For correlated GPs, the marginal normal distribution is no longer axis aligned and there is no closed-form solution.
+
+        </section>
+        <section>
+            <h3 style="margin-top:0;">Computational considerations</h3>
+            
+            The number of partitioning cells \(K\) grows exponentially with the number of objectives \(M\) and number of Pareto points \(N\). 
+            Hence, computing EHVI can become expensive in higher dimensions.
+
+            For \(M=2\), the complexity is \(O(N \log N)\), with the \(\log(N)\) factor coming from sorting the Pareto points to construct the partition.
+            For higher dimensions, the complexity can grow to \(O(N^M)\) in the worst case.
+            
+            <div class="slide-footer">
+            Yang et al. "Efficient computation of expected hypervolume improvement using box decomposition algorithms." Journal of Global Optimization 75.1 (2019): 3-34.
+
+            </div>
+        </section>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <section>
+            <h2>EHVI Extensions: Batch EHVI (qEHVI)</h2>
+            <p>Batch acquisition strategies extend EHVI to select multiple points simultaneously, improving parallel evaluation efficiency.</p>
+            <div class="slide-footer">
+            Daulton et al. "Differentiable expected hypervolume improvement for parallel multi-objective Bayesian optimization." NeurIPS (2020).
+            </div>
+        </section>
+        <section>
+          <h3 style="margin-top:0;">qHVI via the inclusion-exclusion principle</h3>
+            <div style="display:flex; align-items:flex-start; gap:32px;">
+            <div style="flex:1; font-size:0.78em; text-align:left;">
+              <p>Let $\Delta_i = \Delta(\mathbf{f(\mathbf{x}_i)}, \mathbf{r}, \mathcal{P}_Y), i=1,\dots,q$</p>
+              \[
+              \begin{aligned}
+              \text{HVI}(\mathbf{f}(\mathbf{x}), A) &= \lambda_M \left(\bigcup_{i=1}^q \Delta_i \right)\\
+                 &= \sum_{j=1}^q (-1)^{j+1} \sum_{1\leq i_1 < \dots < i_j \leq q} \lambda_M\left(\bigcap_{s=1}^j \Delta_{i_s}\right)
+              \end{aligned}
+              \]
+              and with the partitioning into hyperrectangles $\{S_k\}_{k=1}^K$ each intersection term is a the hyperrectangle
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="svg/partitioning_qEHVI.svg" alt="qEHVI partitioning diagram"
+                   style="width:400px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+              <!-- <figcaption style="font-size:0.52em; color:#475569; margin-top:5px;">EHVI is the sum of expected contributions from each cell</figcaption> -->
+            </figure>
+          </div>
+            <div style="flex:1; font-size:0.78em; text-align:left;">
+            \[\sum_{k=1}^K \lambda_M\left(S_k \cap \bigcap_{s=1}^j \Delta_{i_s}\right)\]
+            </div>
+            <div class="slide-footer">
+            Daulton et al. "Differentiable expected hypervolume improvement for parallel multi-objective Bayesian optimization." NeurIPS (2020).
+            </div>
+        </section>
+        <section>
+            <h3 style="margin-top:0;">Computation of qEHVI</h3>
+            <p>Daulton et al. (2020) claim no closed-form solution is available for $q>1$ and $M>2$, hence, Monte Carlo methods are typically used for approximation.</p>
+
+            The computational complexity is \(O((2^q-1) MN_{\text{MC}}K)\) due to the exponential number of intersection terms in the inclusion-exclusion expansion.
+            <div class="slide-footer">
+            Daulton et al. "Differentiable expected hypervolume improvement for parallel multi-objective Bayesian optimization." NeurIPS (2020).
+            </div>
+        </section>
+
+      </section>
+
+      <section>
+        <section>
+            <h2>EHVI Extensions: Noisy EHVI (NEHVI)</h2>
+            <p>Assume we only get noisy observations 
+                $$\mathbf{y}_i = \mathbf{f}(\mathbf{x}_i) + \mathbf{\epsilon}_i$$
+                where $\mathbf{\epsilon}_i\sim\mathcal{N}(0, \Sigma_i)$ is observation noise.
+                Then the Pareto set is no longer deterministic and we need to take the expectation of the HVI over the posterior distribution of the Pareto set:
+                \[\text{NEHVI}(\mathbf{x}^{\star}\mid Y) = \mathbb{E}_{\mathcal{P}_Y}[\text{EHVI}(\mathbf{x}^{\star}, \mathcal{P}_Y)]\]
+                where the expectation is taken over the posterior distribution of the Pareto set $\mathcal{P}_Y$ induced by the surrogate model and the observation noise.
+            </p>
+            <div class="slide-footer">
+            Daulton et al. "Parallel Bayesian optimization of multiple noisy objectives with expected hypervolume improvement." arXiv:2105.08195 (2021).
+            </div>
+        </section>
+        <section>
+            <h3>Extensions: Noisy EHVI (NEHVI)</h3>
+            <p> NEHVI can be approximated via Monte Carlo by sampling Pareto sets from the posterior distribution
+                \[\mathbf{f}_t \sim p(\mathbf{f} | \mathcal{D}),\quad t=1,\dots,T\]
+                so that
+                \[\mathcal{P}_t = \{\mathbf{f}(\mathbf{x}) \mid \mathbf{x} \in \mathcal{X}_n\ \text{s.t.}\ \nexists \mathbf{x}' \in \mathcal{X}_n : \mathbf{f}(\mathbf{x}') \succ \mathbf{f}(\mathbf{x})\}\]
+
+                Averaging their EHVI values gives a Monte Carlo estimate of nEHVI:
+    
+                \[\text{NEHVI}(\mathbf{x}^{\star} \mid \mathcal{D}) \approx \frac{1}{T} \sum_{t=1}^T \text{EHVI}(\mathbf{x}^{\star}, \mathcal{P}_t)\]
+            </p>
+            <div class="slide-footer">
+            Daulton et al. "Parallel Bayesian optimization of multiple noisy objectives with expected hypervolume improvement." arXiv:2105.08195 (2021).
+            </div>
+        </section>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <section>
+            <h2>Probability of Hypervolume Improvement (PHVI)</h2>
+            <p>Similarly to the single-objective case, we can also define a <strong>probability of improvement variant</strong> of HVI:</p>
+
+            <div style="display:flex; align-items:flex-start; gap:32px;">
+                <div style="flex:1; font-size:1em; text-align:left;">
+                <div class="def-block">
+                <div class="def-title">Definition: PHVI</div>
+                <div class="def-body">
+                    <p style="margin:0 0 0.4em;">The probability that a candidate design point \(\mathbf{x}^{\star}\) improves the hypervolume over the current Pareto set \(\mathcal{P}_Y\) is given by</p>
+                    <p style="text-align:center; margin:0;">\[\text{PHVI}(\mathbf{x}^{\star}\mid Y) = \mathbb{P}[\text{HVI}(\mathbf{f}(\mathbf{x}^{\star})\mid Y) > 0]\]</p>
+                </div>
+                </div>
+                </div>
+                <figure style="margin:0; flex:0 0 auto; text-align:center;">
+                <img src="svg/partitioning_phvi.svg" alt="PHVI partitioning"
+                    style="width:400px; height:auto; border:1px solid #d5dbe3; border-radius:8px; display:block;" />
+                <figcaption style="font-size:0.52em; color:#475569; margin-top:5px;">PHVI is the probability that a candidate point improves the hypervolume</figcaption>
+                </figure>
+            </div>
+          </section>
+          <section>
+            <h3 style="margin-top:0;">Computation of PHVI</h3>
+            
+            PHVI can also be computed via partitioning, but the expectation is now over an indicator function rather than a product of truncated moments:
+
+            \[\begin{aligned}
+                \text{PHVI}(\mathbf{x}^{\star}\mid Y)
+                &= \int_{\mathbb{R}^M} \mathbb{I}[\text{HVI}(\mathbf{f}(\mathbf{x}^{\star})\mid Y) > 0] \, p(\mathbf{f}(\mathbf{x}^{\star})\mid \mathcal{D}) \, \mathrm{d}\mathbf{f}(\mathbf{x}^{\star})\\=
+                &= \sum_{k=1}^{K} \prod_{m=1}^{M} \left[\Phi\left(\frac{u_k^m-\mu_m}{\sigma_m}\right) - \Phi\left(\frac{l_k^m-\mu_m}{\sigma_m}\right)\right].
+            \end{aligned}\]
+
+            for independent GPs, and no closed-form for correlated GPs for $M>2$.
+            Same computational scaling as EHVI applies due to the partitioning step.
+
+
+            
+            <div class="slide-footer">
+            Yang et al. "Efficient computation of expected hypervolume improvement using box decomposition algorithms." Journal of Global Optimization 75.1 (2019): 3-34.
+
+            </div>
+        </section>
+        <section>
+            <h3 style="margin-top:0;">Some considerations on PHVI</h3>
+            
+            <ul>
+                <li>PHVI is independent of a reference point \(\mathbf{r}\).</li>
+                <li>PHVI also suffers from computational scaling issues due to the partitioning.</li>
+                <li>Empirically, EHVI often performs better than PHVI.</li>
+            </ul>
+
+            
+            <div class="slide-footer">
+            Yang et al. "Efficient computation of expected hypervolume improvement using box decomposition algorithms." Journal of Global Optimization 75.1 (2019): 3-34.
+            </div>
+        </section>
+      </section>
+
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section data-visibility="hidden">
+            <h2>Hypervolume Knowledge Gradient (HV-KG)</h2>
+            <p>Knowledge gradient is greedy about <strong>decision quality</strong>. In standard BO, KG selects the next point that maximizes the marginal gain of the posterior mean when adding a new observation $\mathbf{x}$.</p>
+
+            <div style="display:flex; align-items:flex-start; gap:32px;">
+                <div style="flex:1; font-size:1em; text-align:left;">
+                <div class="def-block">
+                <div class="def-title">Definition: HV-KG</div>
+                <div class="def-body">
+                    <p style="margin:0 0 0.4em;">The hypervolume knowledge gradient (HV-KG) for a candidate design point \(\mathbf{x}\) is given by</p>
+                    <p style="text-align:center; margin:0;">\[\text{HV-KG}(\mathbf{x}, A) = \mathbb{E}_{\mathcal{D}}\left[\max_{X\subset\mathcal{X}}\text{HV}(\mathbf{\mu}(\mathbf{x}) \mid \mathcal{D}\cup\{\mathbf{x}, \mathbf{y}\})\, -\, \max_{X\subset\mathcal{X}} \text{HV} (\mathbf{\mu}(\mathbf{x}) \mid \mathcal{D})\right]\]</p>
+                </div>
+                </div>
+                </div>
+            </div>
+            <p>Naturally works for noisy observations, but requires an inner optimization loop to compute the maximum hypervolume over the design space.</p>
+      </section>
+      
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2>Practical considerations for HVI-family acquisitions</h2>
+
+        <ul style="font-size:0.82em;">
+          <li>Partitioning is expensive as \(M\) increases.</li>
+          <li>How to choose the reference point \(r\)? It should be dominated by all Pareto-optimal points, but not too far away to avoid numerical issues.</li>
+          <li>EHVI/PHVI optimization can be challenging due to non-convexity.</li>
+        </ul>
+
+        <h4 style="margin-top:0.9em;">LogEI / LogEHVI to improve numerical stability</h4>
+        <ul style="font-size:0.82em;">
+          <li>Classic EI-family acquisitions can have numerically vanishing values and gradients.</li>
+          <li>Log-space reformulations improve optimization stability.</li>
+        </ul>
+
+        <div style="margin-top:0.7em; padding:0.55em 0.9em; background:#fdf0f6; border-left:4px solid #830051; border-radius:0 8px 8px 0; color:#4d0030; font-size:0.82em; font-weight:600;">
+          Acquisition optimization quality can dominate downstream BO performance.
+        </div>
+
+        <div class="slide-footer">
+          Ament et al. "Unexpected improvements to expected improvement for Bayesian optimization." NeurIPS 36 (2023): 20577–20612.
+        </div>
+      </section>
+
+<!-- Information-based MOBO -->
+<!-- ================================================================================================================== -->
+
+       <section class="subsection-divider" style="text-align:center;">
+        <h2>Information-based acquisition strategies</h2>
+        <p>PESMO · MESMO</p>
+       </section>
+       <!-- ------------------------------------------------------------------------------------------------------------ -->
+       <section data-markdown>
+        <textarea data-template>
+        ## Recap: Information-based acquisition functions in single-objective BO
+
+        Acquisition functions that directly quantify the **expected information gain** about the optimum, e.g., 
+        - **PES**: Predictive Entropy Search about the location $\mathbf{x}^\star$ of the optimum
+        - **MES**: Max-value Entropy Search about the value $f^\star$ of the optimum.
+
+        In the multi-objective setting, we can similarly define
+        - **PESMO**: Predictive Entropy Search for Multi-objective Optimization
+        - **MESMO**: Max-value Entropy Search for Multi-objective Optimization
+
+        to construct acquisitons that directly target reducing uncertainty about the Pareto-optimal region.
+        </textarea>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <section>
+          <h2>Predictive Entropy Search for MOBO (PESMO)</h2>
+          <p style="font-size:0.82em;">The PESMO acquisition function quantifies the expected reduction in entropy of the Pareto front inputs \(X_{\mathcal{P}}\) after observing the outcome \(\mathbf{y}\) of a candidate design point \(\mathbf{x}\),</p>
+          \[\alpha_{\text{PESMO}}(\mathbf{x}) = \mathbb{H}(X_{\mathcal{P}} \mid \mathcal{D}) - \mathbb{E}_{\mathbf{y}}\!\left[\mathbb{H}(X_{\mathcal{P}} \mid \mathcal{D}_n \cup \{(\mathbf{x}, \mathbf{y})\})\right].\]
+         <p style="font-size:0.82em;">This is the expected mutual information of the new observation $(\mathbf{x}^\star, \mathbf{y}^\star)$ and the true Pareto set inputs \(X_{\mathcal{P}}\).
+            Remember the mutual information is symmetric,
+          \[I(A; B) = \mathbb{H}(A) - \mathbb{H}(A\mid B) = \mathbb{H}(B) - \mathbb{H}(B\mid A) = I(B; A)\]
+          so the acquisition function can be rephrased as
+         </p>
+         
+         \[\alpha_{\text{PESMO}}(\mathbf{x}^\star) = \mathbb{H}(\mathbf{y} \mid \mathcal{D}, \mathbf{x}) - \mathbb{E}_{X_{\mathcal{P}}}\!\left[\mathbb{H}(\mathbf{y} \mid \mathcal{D}, \mathbf{x}, X_{\mathcal{P}})\right].\]
+          <div class="slide-footer">
+            Hernández-Lobato et al. "Predictive entropy search for multi-objective Bayesian optimization." ICML. PMLR, 2016.
+          </div>
+        </section>
+        <section>
+          <h2>PESMO computation</h2>
+          <div style="display:flex; gap:1.5em; align-items:flex-start;">
+            <div style="flex:1;">
+              <p style="font-size:0.82em;">The second term \(\mathbb{E}_{X_{\mathcal{P}}}\!\left[\mathbb{H}(\mathbf{y} \mid \mathcal{D}, \mathbf{x}, X_{\mathcal{P}})\right]\) cannot be computed in closed form, hence we have to approximate it.</p>
+
+              <ul style="font-size:0.82em;">
+                <li>Draw $T$ samples $\mathbf{f}_t\sim p(\mathbf{f}\mid \mathcal{D})$</li>
+                <li>Optimize the $\{\mathbf{f}_t\}_{t=1}^T$ with grid search or NSGA-II (these are $T$ MOO problems!)</li>
+                <li>Use expectation propagation to estimate entropy</li>
+              </ul>
+
+              <p style="font-size:0.82em;">Computational cost: $\mathcal{O} (MTN_{\mathcal{P}}^3)$ with $M$ objectives, $T_{\text{MC}}$ samples, and $N_{\mathcal{P}}$ the dimension of the optimal Pareto set.</p>
+            </div>
+            <figure style="margin:0; flex:0 0 auto; text-align:center;">
+              <img src="img/PESMO.png"
+                   alt="PESMO acquisition function"
+                   style="width:360px; height:auto; border:1px solid #d5dbe3; border-radius:10px; background:#f9fbff; display:block;" />
+            </figure>
+          </div>
+        </section>
+      </section>
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <section>
+          <h2>Max-value Entropy Search for MOBO (MESMO)</h2>
+          <p style="font-size:0.82em;">To overcome PESMO's dependence on the $N_{\mathcal{P}}D$-dimensional distribution $p(X_{\mathcal{P}} \mid \mathcal{D})$, MESMO instead considers the mutual information between the Pareto front $Y_\mathcal{P}$ and a new observation $\mathbf{y}$,
+          </p>
+          \[\alpha_{\text{MESMO}}(\mathbf{x}) = \mathbb{H}(Y_{\mathcal{P}} \mid \mathcal{D}) - \mathbb{E}_{\mathbf{y}}\!\left[\mathbb{H}(Y_{\mathcal{P}} \mid \mathcal{D}_n \cup \{(\mathbf{x}, \mathbf{y})\})\right].\]
+          <!-- \[\alpha_{\text{MESMO}}(\mathbf{x}) = \mathbb{E}_{\mathbf{y}}[I(\{\mathbf{x}, \mathbf{y}\}, Y_{\mathcal{P}}\mid \mathcal{D})]\] -->
+         <p style="font-size:0.82em;">which is, again exploiting the symmetry of $I(\cdot;\cdot)$
+         </p>
+         
+         \[\alpha_{\text{MESMO}}(\mathbf{x}^\star) = \underbrace{\mathbb{H}(\mathbf{y} \mid \mathcal{D}, \mathbf{x})}_{\text{easy}} - \underbrace{\mathbb{E}_{Y_\mathcal{P}} [\mathbb{H}(\mathbf{y}\mid \mathcal{D}, \mathbf{x}, Y_{\mathcal{P}})]}_{\text{requires approximation}}\]
+          <div class="slide-footer">
+            Belakaria et al. "Max-value entropy search for multi-objective Bayesian optimization." NeurIPS (2019).
+          </div>
+        </section>
+        <section>
+          <h2>MESMO computation</h2>
+          <p style="font-size:0.82em;">The second term \(\mathbb{E}_{Y_{\mathcal{P}}}\!\left[\mathbb{H}(\mathbf{y} \mid \mathcal{D}, \mathbf{x}, Y_{\mathcal{P}})\right]\) is approximated</p>
+
+          <ul style="font-size:0.82em;">
+            <li>Draw $T$ samples $\mathbf{f}_t\sim p(\mathbf{f}\mid \mathcal{D})$</li>
+            <li>Estimate Pareto front $Y_t$ using NSGA-II (still a MOO problem!)</li>
+            <li>But then, the entropy $\mathbb{H}(\mathbf{y}\mid \mathcal{D}, \mathbf{x}, Y_t)]$ is a truncated Gaussian</li>
+          </ul>
+          <p style="font-size:0.82em;">
+            Hence, with $\gamma_t^m (\cdot) = \frac{y_s^{\star,m} - \mu_m(\cdot)}{\sigma_m (\cdot)} $
+            \[\alpha_{\text{MESMO}}(\mathbf{x}) \approx \frac{1}{T}\sum_{t=1}^T\sum_{m=1}^M \left[\frac{\gamma_t^m (\mathbf{x}) \varphi(\gamma_t^m (\mathbf{x}))}{2\Phi(\gamma_t^m (\mathbf{x}))} - \operatorname{ln} \Phi(\gamma_t^m (\mathbf{x}))\right]\]
+          </p>
+          
+          <p style="font-size:0.82em;"> The computational cost is with $\mathcal{O} (MT)$ lower than the one of PESMO.</p>
+        </section>
+
+      </section>
+
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+       <section class="section-divider" style="text-align:center;">
+        <div style="width:48px; height:48px; border-radius:50%; background:#fff; color:#830051; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.5em; margin:0 auto 0.5em;">3</div>
+        <h2>MOBO in practice</h2>
+        <p>Choosing an acquisition function · Many-objective optimization · Implementation</p>
+       </section>
+       <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <section>
+        <h2 style="margin-bottom:0.4em;">Which acquisition function to choose?</h2>
+
+        <!-- Three acquisition strategy cards -->
+        <div style="display:flex; gap:0.8em; margin-bottom:0.6em;">
+
+          <!-- Scalarization -->
+          <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12); display:flex; flex-direction:column;">
+            <div style="background:#2592a0; color:#fff; padding:0.28em 0.7em; font-weight:600; font-size:0.74em; text-align:center; letter-spacing:0.01em;">
+              Scalarization
+            </div>
+            <div style="background:#e9fcff; color:#15525a; padding:0.4em 0.75em; font-size:0.7em; flex:1; line-height:1.5;">
+              <div style="font-weight:700; color:#15525a; margin-bottom:0.25em;">ParEGO · weighted sum</div>
+              <ul style="margin:0 0 0.3em; padding-left:1.1em;">
+                <li>Converts MOO to single-objective</li>
+                <li>Random weights explore diverse trade-offs</li>
+                <li>Simple, fast — common baseline</li>
+              </ul>
+              <div style="font-size:0.88em; color:#15525a; border-top:1px solid #cfe8ef; padding-top:0.25em; margin-top:0.2em; font-weight:600;">
+                ✓ Simple default
+              </div>
+            </div>
+          </div>
+
+          <!-- Hypervolume -->
+          <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12); display:flex; flex-direction:column;">
+            <div style="background:#768000; color:#fff; padding:0.28em 0.7em; font-weight:600; font-size:0.74em; text-align:center; letter-spacing:0.01em;">
+              Hypervolume-based
+            </div>
+            <div style="background:#feffef; color:rgb(9, 21, 41); padding:0.4em 0.75em; font-size:0.7em; flex:1; line-height:1.5;">
+              <div style="font-weight:700; color:#4c5300; margin-bottom:0.25em;">EHVI · PHVI</div>
+              <ul style="margin:0 0 0.3em; padding-left:1.1em;">
+                <li>Directly maximizes HV gain</li>
+                <li>Batch &amp; noisy variants available</li>
+                <li>LogEHVI improves numerical stability</li>
+              </ul>
+              <div style="font-size:0.88em; color:#4c5300; border-top:1px solid #bfdbfe; padding-top:0.25em; margin-top:0.2em; font-weight:600;">
+                ✓ State-of-the-art for small \(M\)
+              </div>
+            </div>
+          </div>
+
+          <!-- Information-based -->
+          <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12); display:flex; flex-direction:column;">
+            <div style="background:#3c1053; color:#fff; padding:0.28em 0.7em; font-weight:600; font-size:0.74em; text-align:center; letter-spacing:0.01em;">
+              Information-based
+            </div>
+            <div style="background:#f7e9ff; color:#3c1053; padding:0.4em 0.75em; font-size:0.7em; flex:1; line-height:1.5;">
+              <div style="font-weight:700; color:#3c1053; margin-bottom:0.25em;">PESMO · MESMO</div>
+              <ul style="margin:0 0 0.3em; padding-left:1.1em;">
+                <li>Targets uncertainty about the Pareto front</li>
+                <li>Principled information-theoretic foundation</li>
+                <li>Higher computational overhead</li>
+              </ul>
+              <div style="font-size:0.88em; color:#3c1053; border-top:1px solid #ddd6fe; padding-top:0.25em; margin-top:0.2em; font-weight:600;">
+                ✓ Best when evaluations are very scarce
+              </div>
+            </div>
+          </div>
+
+        </div>
+       </section>
+
+      <!-- ------------------------------------------------------------------------------------------------------------ --> 
+      <section>
+        <h2>Many-objective optimization</h2>
+        <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(16,55,92,0.10); display:flex; flex-direction:column;">
+              <div style="background:#7f1d1d; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.85em; letter-spacing:0.01em;">
+                Many problems arise when the number of objectives grows to $M \gtrsim 4$
+              </div>
+              <div style="background:#ffebeb; color:#450a0a; padding:0.55em 0.85em; font-size:0.85em; flex:1;">
+                <ul>
+                  <li>Loss of discriminative power of Pareto dominance as $M$ increases
+                    <ul style="font-size:0.85em;">
+                      <li>Most points become non-dominated</li>
+                      <li>Hypervolume becomes less informative</li>
+                    </ul>
+                  </li>
+                  <li>Explosion of the Pareto set ⭢ too many trade-offs</li>
+                  <li>Hypervolume becomes expensive to compute, and is less meaningful</li>
+                </ul>
+              </div>
+            </div>
+        
+
+          <div style="margin-top:1em; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.10);">
+            <div style="background:#10375c; color:#fff; padding:0.28em 0.8em; font-weight:600; font-size:0.85em; letter-spacing:0.01em;">
+              Solution approaches
+            </div>
+            <div style="background:#bfcedb; color:#10375c; padding:0.45em 0.85em; font-size:0.85em;">
+              <ul>
+                <li>Include preference information</li>
+                <li>Restrict the search space using reference directions</li>
+                <li>Use scalarization and decomposition to find decision-relevant subsets of trade-offs</li>
+              </ul>
+            </div>
+          </div>
+       </section>
+
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+       <!-- <section class="subsection-divider" style="text-align:center;">
+        <h2>Implementation</h2>
+       </section> -->
+
+      <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <!-- IFRAME SLIDE: replace the src URL with any public webpage -->
+      <!-- <section style="padding:0; overflow:hidden;">
+        <div style="display:flex; flex-direction:column; width:100%; height:720px;">
+          <div style="flex:0 0 auto; padding:0.45em 0.9em; background:#f8fafc; border-bottom:1px solid #d1d5db; font-size:0.72em; color:#475569; font-weight:600;">
+            BoTorch documentation
+          </div>
+          <iframe
+            src="https://botorch.org"
+            style="flex:1; width:100%; border:none; display:block;"
+            title="BoTorch documentation">
+          </iframe>
+        </div>
+      </section> -->
+
+
+      <!-- Marimo notebook demo: MOBO in 1D -->
+      <section style="padding:0; overflow:hidden;">
+      <div style="display:flex; flex-direction:column; width:100%; height:720px;">
+        <div style="flex:0 0 auto; padding:0.45em 0.9em; background:#f8fafc; border-bottom:1px solid #d1d5db; font-size:0.72em; color:#475569; font-weight:600;">
+          marimo notebook: MOBO demo for a 1D problem
+        </div>
+        <iframe
+          src="http://localhost:2718"
+          style="flex:1; width:100%; border:none; display:block;"
+          allow="cross-origin-isolated">
+        </iframe>
+      </div>
+    </section>
+
+
+    <!-- Marimo notebook demo: MOBO in multi-D -->
+      <section style="padding:0; overflow:hidden;">
+      <div style="display:flex; flex-direction:column; width:100%; height:720px;">
+        <div style="flex:0 0 auto; padding:0.45em 0.9em; background:#f8fafc; border-bottom:1px solid #d1d5db; font-size:0.72em; color:#475569; font-weight:600;">
+          marimo notebook: MOBO demo for a multi-D problem
+        </div>
+        <iframe
+          src="http://localhost:2719"
+          style="flex:1; width:100%; border:none; display:block;"
+          allow="cross-origin-isolated">
+        </iframe>
+      </div>
+    </section>
+
+
+      <section class="summary-slide">
+        <h2 style="margin-bottom:0.4em;">Take-home messages</h2>
+
+        <!-- Goal -->
+        <div class="color-block"
+             style="--cb-title-bg:#10375c; --cb-title-color:#fff;
+                    --cb-body-bg:#dbeafe;  --cb-body-color:#1e293b; margin:0 0 0.6em;">
+          <div class="block-title">Goal: find the Pareto frontier</div>
+          <div class="block-body" style="font-size:0.78em; line-height:1.4;">
+            Real-world problems involve <strong>competing objectives</strong> — there is no single best solution.
+            MOBO finds a diverse set of <strong>Pareto-optimal trade-offs</strong>, using GP surrogates to allocate a costly evaluation budget wisely.
+          </div>
+        </div>
+
+        <!-- Three acquisition strategy cards -->
+        <div style="display:flex; gap:0.8em; margin-bottom:0.6em;">
+
+          <!-- Scalarization -->
+          <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12); display:flex; flex-direction:column;">
+            <div style="background:#2592a0; color:#fff; padding:0.28em 0.7em; font-weight:600; font-size:0.74em; text-align:center; letter-spacing:0.01em;">
+              Scalarization
+            </div>
+            <div style="background:#e9fcff; color:#15525a; padding:0.4em 0.75em; font-size:0.7em; flex:1; line-height:1.5;">
+              <div style="font-weight:700; color:#15525a; margin-bottom:0.25em;">ParEGO · weighted sum</div>
+              <ul style="margin:0 0 0.3em; padding-left:1.1em;">
+                <li>Converts MOO to single-objective</li>
+                <li>Random weights explore diverse trade-offs</li>
+                <li>Simple, fast — common baseline</li>
+              </ul>
+              <div style="font-size:0.88em; color:#15525a; border-top:1px solid #cfe8ef; padding-top:0.25em; margin-top:0.2em; font-weight:600;">
+                ✓ Simple default
+              </div>
+            </div>
+          </div>
+
+          <!-- Hypervolume -->
+          <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12); display:flex; flex-direction:column;">
+            <div style="background:#768000; color:#fff; padding:0.28em 0.7em; font-weight:600; font-size:0.74em; text-align:center; letter-spacing:0.01em;">
+              Hypervolume-based
+            </div>
+            <div style="background:#feffef; color:rgb(9, 21, 41); padding:0.4em 0.75em; font-size:0.7em; flex:1; line-height:1.5;">
+              <div style="font-weight:700; color:#4c5300; margin-bottom:0.25em;">EHVI · PHVI</div>
+              <ul style="margin:0 0 0.3em; padding-left:1.1em;">
+                <li>Directly maximizes HV gain</li>
+                <li>Batch &amp; noisy variants available</li>
+                <li>LogEHVI improves numerical stability</li>
+              </ul>
+              <div style="font-size:0.88em; color:#4c5300; border-top:1px solid #bfdbfe; padding-top:0.25em; margin-top:0.2em; font-weight:600;">
+                ✓ State-of-the-art for small \(M\)
+              </div>
+            </div>
+          </div>
+
+          <!-- Information-based -->
+          <div style="flex:1; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12); display:flex; flex-direction:column;">
+            <div style="background:#3c1053; color:#fff; padding:0.28em 0.7em; font-weight:600; font-size:0.74em; text-align:center; letter-spacing:0.01em;">
+              Information-based
+            </div>
+            <div style="background:#f7e9ff; color:#3c1053; padding:0.4em 0.75em; font-size:0.7em; flex:1; line-height:1.5;">
+              <div style="font-weight:700; color:#3c1053; margin-bottom:0.25em;">PESMO · MESMO</div>
+              <ul style="margin:0 0 0.3em; padding-left:1.1em;">
+                <li>Targets uncertainty about the Pareto front</li>
+                <li>Principled information-theoretic foundation</li>
+                <li>Higher computational overhead</li>
+              </ul>
+              <div style="font-size:0.88em; color:#3c1053; border-top:1px solid #ddd6fe; padding-top:0.25em; margin-top:0.2em; font-weight:600;">
+                ✓ Best when evaluations are very scarce
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Scalability callout -->
+        <div style="border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.12);">
+          <div style="background:#830051; color:#fff; padding:0.25em 0.85em; font-weight:600; font-size:0.74em; letter-spacing:0.01em;">
+            ⚠&ensp;Scalability: MOBO works well for \(M \lesssim 4\) objectives
+          </div>
+          <div style="background:#ffeef8; color:#4d0030; padding:0.35em 0.85em; font-size:0.7em; line-height:1.5;">
+            As \(M\) grows, Pareto dominance loses discriminative power, the frontier becomes intractable, and hypervolume is expensive to compute.
+            For many objectives, consider <strong>preference-guided</strong> or <strong>decomposition-based</strong> methods.
+          </div>
+        </div>
+      </section>
+      <section class="section-divider" style="text-align:center;">
+        <h1>The End</h1>
+        <h3>Q & A</h3>
+       </section>
+<!-- ================================================================================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/math/math.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      center: true,
+      slideNumber: true,
+      transition: "slide",
+      width: 1100,
+      height: 720,
+      margin: 0.05,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealNotes ]
+    });
+  </script>
+  <script>
+    Reveal.configure({ pdfSeparateFragments: false });
+  </script>
+</body>
+</html>
