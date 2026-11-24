@@ -18,8 +18,8 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-  "jupyterlab>=4.2",
-  "ipykernel>=6.29",
+  "ipykernel>=7.4.0",∏
+  "marimo>=0.7",
   "pytest>=8.2",
   "ruff>=0.5",
 ]

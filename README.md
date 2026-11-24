@@ -1,6 +1,6 @@
 # MOBO Tutorial
 
-A Python tutorial for **multi-objective Bayesian optimization (MOBO)** based on my tutorial given at [NUMRAD26 Summer School](https://numrad.epfl.ch/) at EPFL, Lausanne (CH). The tutorial combines from-scratch implementations of key MOBO components and Jupyter notebook tutorials for illustration.
+A Python tutorial for **multi-objective Bayesian optimization (MOBO)** originally developped for [NUMRAD26 Summer School](https://numrad.epfl.ch/) at EPFL, Lausanne (CH) and updated for the [Winter School on Robotics and AI for Materials Chemistry 2026](https://aichemy.ac.uk/event/winter-school-robotics-and-ai-for-materials-chemistry-2026/) at University of Liverpool (UK). The tutorial combines from-scratch implementations of key MOBO components and Marimo notebook tutorials for illustration.
 
 The main idea of the tutorial is to showcase the key building blocks of multi-objective Bayesian optimization. The implementation of Gaussian process inference uses [gpytorch](https://gpytorch.ai/), but the main MOBO loop and some acquisition functions are implemented from scratch for demonstration purposes.
 The directly implemented acquistion functions are complemented by additional ones wrapped from [botorch](https://botorch.org/).
@@ -27,7 +27,7 @@ uv sync
 source .venv/bin/activate
 ```
 
-To also install the development dependencies (JupyterLab, pytest, ruff):
+To also install the development dependencies (marimo, pytest, ruff):
 
 ```bash
 uv sync --group dev
@@ -39,10 +39,9 @@ With the environment activated:
 
 ```bash
 cd tutorial
-jupyter lab
+marimo edit notebooks/mobo_1D.py        # 1D toy problem
+marimo edit notebooks/mobo_tutorial.py  # full tutorial
 ```
-
-Then open `notebooks/mobo_1D.ipynb` or `notebooks/mobo_tutorial.ipynb`.
 
 ---
 

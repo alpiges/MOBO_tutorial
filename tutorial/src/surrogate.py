@@ -54,6 +54,7 @@ def fit_gp(
     lr: float = 0.1,
     lengthscale_prior: gpytorch.priors.Prior | None = None,
     min_noise: float = 1e-4,
+    fix_noise: bool = False,
 ) -> list[_ExactGPModel]:
     """Train one GP per objective column in train_y.
 
@@ -74,6 +75,9 @@ def fit_gp(
         Lower bound on the observation noise variance (default 1e-4).
         Prevents the Cholesky from becoming singular when observations
         are nearly noiseless.
+    fix_noise:
+        If True, pin the noise to ``min_noise`` and exclude it from the
+        optimiser.  Use for noiseless (exact) function evaluations.
 
     Returns
     -------
@@ -85,11 +89,18 @@ def fit_gp(
         y_m = train_y[:, m]
         likelihood = GaussianLikelihood(noise_constraint=GreaterThan(min_noise))
         model = _ExactGPModel(train_x, y_m, likelihood, lengthscale_prior=lengthscale_prior)
+
+        if fix_noise:
+            likelihood.noise = torch.tensor(min_noise, dtype=train_x.dtype)
+            likelihood.noise_covar.raw_noise.requires_grad_(False)
+
         model.train()
         likelihood.train()
 
+        trainable = [p for p in list(model.parameters()) + list(likelihood.parameters())
+                     if p.requires_grad]
         optimizer = torch.optim.LBFGS(
-            list(model.parameters()) + list(likelihood.parameters()),
+            trainable,
             lr=lr,
             max_iter=n_iter,
             line_search_fn="strong_wolfe",

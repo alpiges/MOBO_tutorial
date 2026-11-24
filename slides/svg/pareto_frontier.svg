@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" role="img" aria-label="Toy Pareto frontier in two objectives">
+  <defs>
+    <marker id="arrowA" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="440" fill="#f9fbff"/>
+
+  <!-- axes -->
+  <line x1="90" y1="360" x2="800" y2="360" stroke="#334155" stroke-width="2" marker-end="url(#arrowA)"/>
+  <line x1="90" y1="360" x2="90"  y2="60"  stroke="#334155" stroke-width="2" marker-end="url(#arrowA)"/>
+
+  <!-- axis labels -->
+  <text x="808" y="367" font-size="20" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1f2937">f<tspan dy="5" font-size="14">1</tspan><tspan dy="-5"></tspan></text>
+  <text x="62" y="58" font-size="20" font-style="italic"
+        font-family="STIX Two Math, Georgia, serif" fill="#1f2937">f<tspan dy="5" font-size="14">2</tspan><tspan dy="-5"></tspan></text>
+
+  <!-- HV fill under staircase -->
+  <polygon points="
+    90,360 90,110 230,110
+    230,145 330,145 330,180 420,180 420,215 510,215
+    510,250 600,250 600,290 690,290 690,360 760,360"
+    fill="#ffe3f4" fill-opacity="0.45" stroke="none"/>
+
+  <!-- gray dominated / incomparable points -->
+  <circle cx="170" cy="320" r="7" fill="#94a3b8"/>
+  <circle cx="280" cy="255" r="7" fill="#94a3b8"/>
+  <circle cx="380" cy="300" r="7" fill="#94a3b8"/>
+  <circle cx="460" cy="280" r="7" fill="#94a3b8"/>
+  <circle cx="545" cy="310" r="7" fill="#94a3b8"/>
+  <circle cx="630" cy="330" r="7" fill="#94a3b8"/>
+
+  <!-- Pareto staircase boundary (decreasing: high f2 at low f1, low f2 at high f1) -->
+  <polyline points="
+    90,110 230,110
+    230,145 330,145 330,180 420,180 420,215 510,215
+    510,250 600,250 600,290 690,290 690,360"
+    fill="none" stroke="#830051" stroke-width="3.5"/>
+
+  <!-- green Pareto dots -->
+  <circle cx="230" cy="110" r="8" fill="#830051"/>
+  <circle cx="330" cy="145" r="8" fill="#830051"/>
+  <circle cx="420" cy="180" r="8" fill="#830051"/>
+  <circle cx="510" cy="215" r="8" fill="#830051"/>
+  <circle cx="600" cy="250" r="8" fill="#830051"/>
+  <circle cx="690" cy="290" r="8" fill="#830051"/>
+
+  <!-- labels -->
+  <!-- <text x="480" y="88" font-size="22" fill="#0f766e" font-weight="700">Pareto frontier</text>
+  <text x="130" y="395" font-size="19" fill="#475569">gray: dominated or incomparable</text>
+  <text x="130" y="420" font-size="19" fill="#0f766e">green: non-dominated (Pareto-optimal)</text> -->
+</svg>
